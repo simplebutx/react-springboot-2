@@ -1,5 +1,6 @@
 import { useState } from "react";
 import api from "@/shared/api/axios";
+import '@/features/auth/styles/Login.css';
 import { useNavigate } from "react-router-dom";
 
 export default function Login() {
@@ -14,7 +15,7 @@ export default function Login() {
       form.append("username", email.trim()); // email을 username으로 보냄
       form.append("password", password);
 
-      await api.post("/login", form, {
+      await api.post("api/login", form, {
         headers: { "Content-Type": "application/x-www-form-urlencoded" },
       });
 
@@ -26,10 +27,24 @@ export default function Login() {
   };
 
   return (
-    <form onSubmit={onSubmit}>
-      <input value={email} onChange={(e) => setEmail(e.target.value)} placeholder="이메일" />
-      <input value={password} onChange={(e) => setPassword(e.target.value)} placeholder="비밀번호" type="password" />
-      <button type="submit">로그인</button>
-    </form>
+    <form className="login-form" onSubmit={onSubmit}>
+  <h2>Login</h2>
+
+  <input
+    value={email}
+    onChange={(e) => setEmail(e.target.value)}
+    placeholder="이메일"
+  />
+
+  <input
+    type="password"
+    value={password}
+    onChange={(e) => setPassword(e.target.value)}
+    placeholder="비밀번호"
+  />
+
+  <button type="submit">로그인</button>
+</form>
+
   );
 }

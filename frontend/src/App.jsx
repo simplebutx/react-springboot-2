@@ -6,6 +6,7 @@ import Signup from "./features/auth/pages/Signup";
 import Login from "./features/auth/pages/Login";
 import MyPage from "./features/auth/pages/Mypage";
 import Navbar from "./shared/components/Navbar";
+import AdminDashboard from "./features/admin/pages/AdminDashboard";
 
 function App() {
 
@@ -19,6 +20,8 @@ function App() {
         <Route path="/login" element={<Login />} />
         <Route path="/mypage" element={<MyPage />} />
         <Route path="/" element={<Home />} />
+        
+        <Route path="/admin" element={<AdminDashboard />} />
       </Routes>
     </>
   )

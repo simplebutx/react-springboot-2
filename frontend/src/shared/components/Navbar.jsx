@@ -2,6 +2,7 @@ import { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 import api from "@/shared/api/axios";
 import { useLocation } from "react-router-dom";
+import '@/shared/styles/Navbar.css';
 
 export default function Navbar() {
   const [user, setUser] = useState(null);
@@ -25,27 +26,30 @@ export default function Navbar() {
   };
 
   return (
-    <nav style={styles.nav}>
-      <Link to="/">Home</Link>
+ <nav className="navbar">
+  <Link to="/" className="logo">MyApp</Link>
 
-      <div>
-        {user ? (
-          <>
-            <span style={{ marginRight: 10 }}>
-              {user.email} 님
-            </span>
+  <div className="nav-right">
+    {user ? (
+      <>
+        <span className="user-email">{user.email} 님</span>
 
-            <Link to="/mypage">마이페이지</Link>
-            <button onClick={logout}>로그아웃</button>
-          </>
-        ) : (
-          <>
-            <Link to="/login">로그인</Link>
-            <Link to="/signup">회원가입</Link>
-          </>
+        <Link to="/mypage">마이페이지</Link>
+
+        {user.role === "ADMIN" && (
+        <Link to="/admin">관리자페이지</Link>
         )}
-      </div>
-    </nav>
+        <button onClick={logout}>로그아웃</button>
+      </>
+    ) : (
+      <>
+        <Link to="/login">로그인</Link>
+        <Link to="/signup">회원가입</Link>
+      </>
+    )}
+  </div>
+</nav>
+
   );
 }
 

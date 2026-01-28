@@ -24,7 +24,9 @@ public class SecurityConfig {
         http
                 .csrf(csrf -> csrf.disable())
                 .cors(cors -> cors.configurationSource(corsConfigurationSource()))
+
                 .formLogin(form -> form
+                        .loginProcessingUrl("/api/login")
                         .successHandler((req, res, auth) -> res.setStatus(200))
                         .failureHandler((req, res, ex) -> res.sendError(401))
                         .permitAll()
@@ -34,9 +36,14 @@ public class SecurityConfig {
                         .authenticationEntryPoint((req, res, ex) -> res.sendError(401))
                 )
                 .authorizeHttpRequests(auth -> auth
-                        .requestMatchers("/api/auth/me").authenticated()   //조건기반 인가 (로그인)
-                        .requestMatchers("/api/auth/**", "/login", "/logout").permitAll()
-                        .anyRequest().authenticated()
+                        .requestMatchers("/", "/index.html", "/assets/**", "/favicon.ico").permitAll()
+                        .requestMatchers("/api/health").permitAll()
+                        .requestMatchers("/api/login", "/api/auth/signup").permitAll()
+                        .requestMatchers("/api/admin/**").hasRole("ADMIN")
+                        .requestMatchers("/api/**").authenticated()
+                        .requestMatchers("/api/auth/me").authenticated()
+                        .anyRequest().permitAll()
+
                 )
                 .logout(logout -> logout
                         .logoutUrl("/logout")
@@ -56,7 +63,10 @@ public class SecurityConfig {
         CorsConfiguration config = new CorsConfiguration();
 
         config.setAllowCredentials(true);   // 쿠키 허용
-        config.addAllowedOrigin("http://localhost:5174"); // 리액트 주소
+
+        config.addAllowedOriginPattern("http://localhost:5173");
+        config.addAllowedOriginPattern("http://react-springboot-frontend.s3-website.ap-northeast-2.amazonaws.com");
+
         config.addAllowedHeader("*");
         config.addAllowedMethod("*");
 

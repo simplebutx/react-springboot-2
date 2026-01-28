@@ -1,0 +1,43 @@
+.admin-container {
+  display: flex;
+  justify-content: center;
+  margin-top: 80px;
+}
+
+.admin-card {
+  width: 800px;
+  padding: 32px;
+
+  background: #1e293b;
+  border-radius: 12px;
+  box-shadow: 0 4px 12px rgba(0,0,0,0.08);
+}
+
+.admin-card h2 {
+  text-align: center;
+  margin-bottom: 24px;
+}
+
+.admin-table {
+  width: 100%;
+  border-collapse: collapse;
+  font-size: 14px;
+}
+
+.admin-table th {
+  text-align: left;
+  padding: 12px;
+   background: #1e293b;
+  color: #e5e7eb;
+  border-bottom: 1px solid #ddd;
+}
+
+.admin-table td {
+  padding: 12px;
+  color: #e5e7eb;
+  border-bottom: 1px solid #334155;
+}
+
+.admin-table tr:hover {
+  background: #020617;
+}

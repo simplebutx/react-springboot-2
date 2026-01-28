@@ -9,6 +9,7 @@ import java.util.Collection;
 import java.util.List;
 
 // User 엔티티를 CustomUserDetails 형태로 감싼다
+// CustomUserDetails는 세션에 들어가는 데이터중 하나
 
 public class CustomUserDetails implements UserDetails {
     private final User user;

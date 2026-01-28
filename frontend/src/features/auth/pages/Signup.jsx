@@ -1,6 +1,7 @@
 import { useState } from "react";
 import api from "@/shared/api/axios"
 import { useNavigate } from "react-router-dom";
+import '@/features/auth/styles/Signup.css';
 
 export default function Signup() {
   const nav = useNavigate();
@@ -20,11 +21,30 @@ export default function Signup() {
   };
 
   return (
-    <form onSubmit={onSubmit}>
-      <input value={email} onChange={(e) => setEmail(e.target.value)} placeholder="이메일" />
-      <input value={password} onChange={(e) => setPassword(e.target.value)} placeholder="비밀번호" type="password" />
-      <input value={name} onChange={(e) => setName(e.target.value)} placeholder="이름" />
-      <button>회원가입</button>
-    </form>
+    <form className="signup-form" onSubmit={onSubmit}>
+      <h2>Sign Up</h2>
+
+  <input
+    value={email}
+    onChange={(e) => setEmail(e.target.value)}
+    placeholder="이메일"
+  />
+
+  <input
+    type="password"
+    value={password}
+    onChange={(e) => setPassword(e.target.value)}
+    placeholder="비밀번호"
+  />
+
+  <input
+    value={name}
+    onChange={(e) => setName(e.target.value)}
+    placeholder="이름"
+  />
+
+  <button type="submit">회원가입</button>
+</form>
+
   );
 }
