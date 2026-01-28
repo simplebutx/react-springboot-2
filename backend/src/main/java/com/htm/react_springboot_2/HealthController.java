@@ -9,4 +9,5 @@ public class HealthController {
     public String health() {
         return "ok";
     }
+
 }
