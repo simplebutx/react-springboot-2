@@ -46,7 +46,7 @@ public class SecurityConfig {
 
                 )
                 .logout(logout -> logout
-                        .logoutUrl("/logout")
+                        .logoutUrl("/api/logout")
                         .invalidateHttpSession(true)
                         .deleteCookies("JSESSIONID")
                         .logoutSuccessHandler((req, res, auth) -> res.setStatus(200))
@@ -65,7 +65,7 @@ public class SecurityConfig {
         config.setAllowCredentials(true);   // 쿠키 허용
 
         config.addAllowedOriginPattern("http://localhost:5173");
-        config.addAllowedOriginPattern("http://react-springboot-frontend.s3-website.ap-northeast-2.amazonaws.com");
+        config.addAllowedOriginPattern("https://d1144r6alf0hee.cloudfront.net");
 
         config.addAllowedHeader("*");
         config.addAllowedMethod("*");
