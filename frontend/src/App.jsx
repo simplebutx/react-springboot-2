@@ -9,7 +9,7 @@ import Navbar from "./shared/components/Navbar";
 import AdminDashboard from "./features/admin/pages/AdminDashboard";
 
 function App() {
-
+   console.log("frontend cicd test");
   return (
     <>
     <Navbar />
@@ -23,6 +23,8 @@ function App() {
         
         <Route path="/admin" element={<AdminDashboard />} />
       </Routes>
+
+   
     </>
   )
 }
