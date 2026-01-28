@@ -4,7 +4,11 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="0ee5a994-df0b-4ff0-8404-c9338db64644" name="변경" comment="" />
+    <list default="true" id="0ee5a994-df0b-4ff0-8404-c9338db64644" name="변경" comment="">
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/frontend/src/shared/pages/Health.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/src/shared/pages/Health.jsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/frontend/src/shared/styles/Navbar.css" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/src/shared/styles/Navbar.css" afterDir="false" />
+    </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
