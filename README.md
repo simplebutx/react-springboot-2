@@ -161,3 +161,10 @@ GET /api/health : 서버 상태 확인
 
 ## 9) 스크린샷 / 데모
 
+## 10) 배포
+- AWS Elastic Beanstalk (Spring Boot JAR)
+- React 빌드 결과물을 Spring Boot static 폴더에 포함하여 통합 배포
+- AWS RDS(MySQL) 사용
+- 동일 도메인 환경에서 세션 기반 로그인(JSESSIONID) 유지
+
+
