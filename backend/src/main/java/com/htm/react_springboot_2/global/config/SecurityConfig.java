@@ -38,7 +38,7 @@ public class SecurityConfig {
                 .authorizeHttpRequests(auth -> auth
                         .requestMatchers("/", "/index.html", "/assets/**", "/favicon.ico").permitAll()
                         .requestMatchers("/api/health").permitAll()
-                        .requestMatchers("/api/login", "/api/auth/signup").permitAll()
+                        .requestMatchers("/api/login", "/api/auth/signup", "/api/logout").permitAll()
                         .requestMatchers("/api/admin/**").hasRole("ADMIN")
                         .requestMatchers("/api/**").authenticated()
                         .requestMatchers("/api/auth/me").authenticated()
