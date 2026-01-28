@@ -20,7 +20,7 @@ export default function Navbar() {
   }, [location]);
 
   const logout = async () => {
-    await api.post("/logout");
+    await api.post("/api/logout");
     setUser(null);
     window.location.href = "/";
   };
