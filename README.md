@@ -44,6 +44,7 @@ React 프론트엔드와 Spring Boot 백엔드로 만든 포트폴리오 프로�
 - (선택) AWS RDS / S3
 - DBeaver(DB 관리)
 
+
 ---
 
 ## 3) 프로젝트 구조 (Backend)
@@ -162,9 +163,32 @@ GET /api/health : 서버 상태 확인
 ## 9) 스크린샷 / 데모
 
 ## 10) 배포
-- AWS Elastic Beanstalk (Spring Boot JAR)
-- React 빌드 결과물을 Spring Boot static 폴더에 포함하여 통합 배포
-- AWS RDS(MySQL) 사용
-- 동일 도메인 환경에서 세션 기반 로그인(JSESSIONID) 유지
+배포 아키텍처
+
+- Frontend: S3 정적 호스팅 + CloudFront
+
+- Backend API: AWS Elastic Beanstalk (Spring Boot JAR 배포)
+
+- Database: AWS RDS (MySQL)
+
+도메인/세션 동작
+
+- 사용자는 CloudFront 도메인으로 접속
+
+- 프론트가 API 요청을 Elastic Beanstalk로 전달
+
+- 세션 기반 인증(JSESSIONID) 을 사용하므로,
+
+  - Axios 요청에 withCredentials: true 설정
+
+  - 백엔드에서 CORS에 allowCredentials(true) + 허용 Origin 지정
+
+CI/CD
+
+- GitHub Actions → Elastic Beanstalk 자동 배포
+
+   - main 브랜치 push 시 ./gradlew clean bootJar
+
+   - 생성된 JAR을 EB로 배포
 
 
