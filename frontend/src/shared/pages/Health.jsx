@@ -7,7 +7,7 @@ function Health() {
   useEffect(() => {
     const fetchHealth = async () => {
       try {
-        const res = await api.get("/api/health");
+        const res = await api.get("/health");
         setMsg(res.data);
       } catch (e) {
         console.log(e);

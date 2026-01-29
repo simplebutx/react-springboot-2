@@ -9,7 +9,7 @@ export default function MyPage() {
   const [loading, setLoading] = useState(true);
 
   useEffect(() => {
-    api.get("/api/auth/me")
+    api.get("/auth/me")
       .then(res => setUser(res.data))
       .catch(err => {
         if (err.response?.status === 401) {

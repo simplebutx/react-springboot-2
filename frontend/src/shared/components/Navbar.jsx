@@ -10,7 +10,7 @@ export default function Navbar() {
 
   // 로그인 상태 확인
   useEffect(() => {
-    api.get("/api/auth/me")
+    api.get("/auth/me")
       .then(res => {
         setUser(res.data);
       })
@@ -20,7 +20,7 @@ export default function Navbar() {
   }, [location]);
 
   const logout = async () => {
-    await api.post("/api/logout");
+    await api.post("/logout");
     setUser(null);
     window.location.href = "/";
   };
@@ -52,13 +52,3 @@ export default function Navbar() {
 
   );
 }
-
-const styles = {
-  nav: {
-    display: "flex",
-    justifyContent: "space-between",
-    padding: "12px",
-    background: "#222",
-    color: "white"
-  }
-};

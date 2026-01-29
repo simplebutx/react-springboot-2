@@ -12,7 +12,7 @@ export default function Signup() {
   const onSubmit = async (e) => {
     e.preventDefault();
     try {
-      await api.post("/api/auth/signup", { email, password, name });
+      await api.post("/auth/signup", { email, password, name });
       alert("회원가입 성공!");
       nav("/login");
     } catch (e) {

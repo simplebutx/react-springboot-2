@@ -8,7 +8,7 @@ export default function AdminDashboard() {
   const [error, setError] = useState("");
 
   useEffect(() => {
-    api.get("/api/admin/users")
+    api.get("/admin/users")
       .then(res => setUsers(res.data))
       .catch(err => {
         const status = err.response?.status;

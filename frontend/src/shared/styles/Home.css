@@ -1,38 +1,180 @@
 .home {
-  padding: 80px 24px;
+  min-height: calc(100vh - 64px);
+  padding: 60px 20px;
+  background: radial-gradient(1200px 700px at 50% 20%, rgba(124, 58, 237, 0.18), transparent 55%),
+              linear-gradient(135deg, #0b1020, #101634);
+  color: rgba(255,255,255,0.9);
 }
 
 .hero {
-  max-width: 900px;
-  margin: 0 auto;
   text-align: center;
+  margin-bottom: 34px;
 }
 
-.hero h1 {
-  font-size: 36px;
-  margin-bottom: 12px;
+.hero-title {
+  font-size: 44px;
+  font-weight: 800;
+  letter-spacing: -0.5px;
+  margin: 0 0 10px;
 }
 
-.hero p {
-  font-size: 16px;
-  color: #8e8e8e;
+.hero-title span {
+  color: #a78bfa;
 }
 
-.features {
-  margin-top: 40px;
+.hero-sub {
+  margin: 0;
+  color: rgba(255,255,255,0.65);
+  font-size: 14px;
+}
+
+.info-grid {
+  max-width: 980px;
+  margin: 0 auto 26px;
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 14px;
+}
+
+.info-card {
+  padding: 16px 16px 14px;
+  border-radius: 16px;
+  background: rgba(255,255,255,0.045);
+  border: 1px solid rgba(255,255,255,0.08);
+  box-shadow: 0 16px 40px rgba(0,0,0,0.25);
+  cursor: default;
+  user-select: text;
+}
+
+.info-head {
   display: flex;
-  gap: 20px;
+  align-items: center;
+  gap: 10px;
+  margin-bottom: 10px;
+}
+
+.info-dot {
+  width: 10px;
+  height: 10px;
+  border-radius: 50%;
+  background: #a78bfa;
+  box-shadow: 0 0 18px rgba(167, 139, 250, 0.5);
+}
+
+.info-card h3 {
+  margin: 0;
+  font-size: 14px;
+  font-weight: 700;
+  color: rgba(255,255,255,0.92);
+}
+
+.info-card ul {
+  margin: 0;
+  padding-left: 16px;
+  color: rgba(255,255,255,0.7);
+  font-size: 13px;
+  line-height: 1.7;
+}
+
+.action-row {
+  max-width: 780px;
+  margin: 0 auto;
+  display: flex;
+  gap: 12px;
   justify-content: center;
+  flex-wrap: wrap;
+}
+
+.btn {
+  padding: 14px 18px;
+  border-radius: 14px;
+  text-decoration: none;
+  font-weight: 700;
+  font-size: 14px;
+  letter-spacing: -0.1px;
+  transition: transform 0.15s ease, box-shadow 0.15s ease, background 0.15s ease;
+}
+
+.btn:hover {
+  transform: translateY(-2px);
+}
+
+.btn-primary {
+  background: linear-gradient(135deg, #7c3aed, #a78bfa);
+  color: #0b1020;
+  box-shadow: 0 18px 45px rgba(124, 58, 237, 0.35);
+}
+
+.btn-ghost {
+  background: rgba(255,255,255,0.06);
+  color: rgba(255,255,255,0.9);
+  border: 1px solid rgba(255,255,255,0.12);
+}
+
+.btn-outline {
+  background: transparent;
+  color: rgba(255,255,255,0.9);
+  border: 1px solid rgba(167, 139, 250, 0.45);
+}
+
+@media (max-width: 900px) {
+  .info-grid {
+    grid-template-columns: 1fr;
+  }
+}
+
+/* ✅ 기능 카드 영역 */
+.feature-grid {
+  max-width: 980px;
+  margin: 0 auto 22px;
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 14px;
 }
 
 .feature-card {
-  width: 200px;
-  padding: 24px;
+  padding: 16px 16px 14px;
+  border-radius: 16px;
+  background: rgba(255,255,255,0.04);
+  border: 1px solid rgba(167, 139, 250, 0.18);
+  box-shadow: 0 16px 40px rgba(0,0,0,0.22);
 
-  background: #1e293b;
-  border-radius: 12px;
-  box-shadow: 0 4px 12px rgba(0,0,0,0.08);
+  cursor: default;          /* ✅ 버튼처럼 보이지 않게 */
+  user-select: text;
+}
 
+.feature-head {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  margin-bottom: 10px;
+}
+
+.feature-dot {
+  width: 10px;
+  height: 10px;
+  border-radius: 50%;
+  background: #a78bfa;
+  box-shadow: 0 0 18px rgba(167, 139, 250, 0.55);
+}
+
+.feature-card h3 {
+  margin: 0;
   font-size: 14px;
-  font-weight: 600;
+  font-weight: 800;
+  color: rgba(255,255,255,0.92);
+}
+
+.feature-card ul {
+  margin: 0;
+  padding-left: 16px;
+  color: rgba(255,255,255,0.72);
+  font-size: 13px;
+  line-height: 1.7;
+}
+
+@media (max-width: 900px) {
+  .feature-grid {
+    grid-template-columns: 1fr;
+  }
 }

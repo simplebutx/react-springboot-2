@@ -15,7 +15,7 @@ export default function Login() {
       form.append("username", email.trim()); // email을 username으로 보냄
       form.append("password", password);
 
-      await api.post("api/login", form, {
+      await api.post("login", form, {
         headers: { "Content-Type": "application/x-www-form-urlencoded" },
       });
 

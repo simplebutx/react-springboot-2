@@ -1,20 +1,22 @@
 .navbar {
-  height: 60px;
-  padding: 0 24px;
-
+  height: 64px;
+  background: linear-gradient(
+    180deg,
+    #141436 0%,
+    #0b1020 100%
+  );
   display: flex;
   align-items: center;
   justify-content: space-between;
-
-  background: #020617;
-  border-bottom: 1px solid #1e293b;
+  padding: 0 24px;
+  border-bottom: 1px solid rgba(167,139,250,0.25);
 }
 
 .logo {
+  color: #a78bfa;
+  font-weight: 800;
   font-size: 18px;
-  font-weight: 700;
   text-decoration: none;
-   color: #e5e7eb;
 }
 
 .nav-right {
@@ -23,30 +25,91 @@
   gap: 16px;
 }
 
-.navbar a {
-  text-decoration: none;
-  color: #6366f1;
-  font-size: 14px;
+.nav-right a {
+  text-decoration: none;            
+  font-weight: 600;
+  color: rgba(255,255,255,0.85);  
 }
 
-.navbar a:hover {
-  color: #4f46e5;
+.nav-right button {
+  color: rgba(255,255,255,0.5);
+  margin-left: 18px;
+  background: none;
+  border: none;
+  cursor: pointer;
+  font-size: 14px;
+  font-weight: 600;
+}
+
+.nav-right a:hover {
+  color: #a78bfa;
+}
+.nav-right button:hover {
+  color: #a78bfa;
 }
 
 .user-email {
   font-size: 14px;
-  color: #8c8c8c;
+  color: #b4b3b3;
 }
 
 .navbar button {
   background: none;
   border: none;
-  color: #6366f1;
+  color:  rgba(255,255,255,0.85);  
   font-size: 14px;
   cursor: pointer;
+  font-weight: 600;
 }
 
 .navbar button:hover {
   color: #4f46e5;
   text-decoration: none;
+}
+
+.toggle-row {
+  max-width: 980px;
+  margin: 0 auto 16px;
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 12px;
+}
+
+.toggle-btn {
+  width: 100%;
+  padding: 16px 18px;
+  border-radius: 16px;
+  border: 1px solid rgba(167, 139, 250, 0.22);
+  background: rgba(255,255,255,0.04);
+  color: rgba(255,255,255,0.9);
+  font-weight: 800;
+  font-size: 14px;
+  letter-spacing: -0.1px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  cursor: pointer;
+  box-shadow: 0 16px 40px rgba(0,0,0,0.18);
+  transition: transform 0.15s ease, background 0.15s ease, border 0.15s ease;
+}
+
+.toggle-btn:hover {
+  transform: translateY(-2px);
+  background: rgba(255,255,255,0.06);
+  border-color: rgba(167, 139, 250, 0.35);
+}
+
+.toggle-btn.active {
+  background: linear-gradient(135deg, rgba(124,58,237,0.35), rgba(167,139,250,0.18));
+  border-color: rgba(167, 139, 250, 0.55);
+}
+
+.chev {
+  opacity: 0.85;
+}
+
+@media (max-width: 900px) {
+  .toggle-row {
+    grid-template-columns: 1fr;
+  }
 }
