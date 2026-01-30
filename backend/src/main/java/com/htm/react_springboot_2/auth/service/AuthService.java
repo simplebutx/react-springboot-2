@@ -17,7 +17,12 @@ public class AuthService {
 
     @Transactional
     public void signup(SignupRequest dto) {
+        if(userRepository.existsByEmail(dto.getEmail())) {
+            throw new IllegalArgumentException("이미 가입중인 이메일입니다.");
+        }
+
         String hashedPassword = passwordEncoder.encode(dto.getPassword());
+
         User user = new User(dto.getEmail() , hashedPassword, dto.getName());    // 회원가입 DTO -> Entity로 변환
         userRepository.save(user);   // repository 호출
     }

@@ -3,6 +3,7 @@ import api from "@/shared/api/axios"
 import { useNavigate } from "react-router-dom";
 import '@/features/auth/styles/Signup.css';
 import { useUI } from "@/shared/ui/uiStore";
+import { getErrorMessage } from "@/shared/utils/getErrorMessage";
 
 export default function Signup() {
   const nav = useNavigate();
@@ -17,8 +18,8 @@ export default function Signup() {
       await api.post("/auth/signup", { email, password, name });
       ui.toast("회원가입 성공!");
       nav("/login");
-    } catch (e) {
-      ui.toast("회원가입 실패");
+    } catch (err) {
+      ui.toast(getErrorMessage(err, "회원가입 실패"));
     }
   };
 

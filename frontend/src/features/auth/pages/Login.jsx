@@ -17,15 +17,23 @@ export default function Login() {
       form.append("username", email.trim()); // email을 username으로 보냄
       form.append("password", password);
 
-      await api.post("login", form, {
+      await api.post("/login", form, {
         headers: { "Content-Type": "application/x-www-form-urlencoded" },
       });
 
       ui.toast("로그인 성공");
       nav("/mypage");
-    } catch (e) {
-      ui.toast("로그인 실패");
-    }
+    } catch (err) {
+        if (!err.response) {
+          ui.toast("서버에 연결할 수 없습니다.");
+          return;
+        }
+        if (err.response.status >= 500) {
+          ui.toast("서버 오류가 발생했습니다.");
+          return;
+        }
+        ui.toast("아이디 또는 비밀번호가 올바르지 않습니다.");    // 로그인만 메세지 하드코딩
+      }
   };
 
   return (

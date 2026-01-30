@@ -8,16 +8,16 @@ export default function MyPage() {
   const [user, setUser] = useState(null);
   const [loading, setLoading] = useState(true);
 
-  useEffect(() => {
-    api.get("/auth/me")
-      .then(res => setUser(res.data))
-      .catch(err => {
-        if (err.response?.status === 401) {
-          nav("/login", { replace: true });
-        }
-      })
-      .finally(() => setLoading(false));
-  }, [nav]);
+useEffect(() => {
+  api.get("/auth/me")
+    .then(res => setUser(res.data))
+    .catch(err => {
+      if (err.response?.status === 401) {
+        nav("/login", { replace: true });
+      }
+    })
+    .finally(() => setLoading(false));
+}, [nav]);
 
   if (loading) return <div style={{ padding: 20 }}>로딩중...</div>;
   if (!user) return null;

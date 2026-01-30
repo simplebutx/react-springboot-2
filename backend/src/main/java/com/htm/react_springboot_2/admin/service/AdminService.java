@@ -32,7 +32,7 @@ public class AdminService {
     @Transactional
     public void changeUserRole(AdminChangeUserRoleRequest dto, Long id) {
         User user = userRepository.findById(id).
-                orElseThrow(()-> new IllegalArgumentException("유저없음"));
+                orElseThrow(()-> new IllegalArgumentException("유저 없음"));
         user.updateRole(dto.getRole());
     }
 }

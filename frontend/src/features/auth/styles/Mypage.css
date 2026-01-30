@@ -20,7 +20,9 @@
 
 .row {
   display: flex;
-  justify-content: space-between;
+  align-items: center;
+   gap: 12px;  
+  /* justify-content: space-between; */
   padding: 12px 0;
   border-bottom: 1px solid #eee;
   font-size: 14px;
