@@ -4,8 +4,10 @@ package com.htm.react_springboot_2.admin.controller;
 import com.htm.react_springboot_2.admin.dto.AdminChangeUserRoleRequest;
 import com.htm.react_springboot_2.admin.dto.AdminUserListResponse;
 import com.htm.react_springboot_2.admin.service.AdminService;
+import com.htm.react_springboot_2.auth.domain.CustomUserDetails;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -23,14 +25,14 @@ public class AdminController {
     }
 
     @DeleteMapping("/api/admin/users/{id}")
-    public ResponseEntity<Void> deleteUser(@PathVariable Long id) {
-        adminService.deleteUser(id);
+    public ResponseEntity<Void> deleteUser(@PathVariable Long id, @AuthenticationPrincipal CustomUserDetails userDetails) {
+        adminService.deleteUser(id, userDetails.getId());
         return ResponseEntity.noContent().build();
     }
 
     @PutMapping("/api/admin/users/{id}")
-    public ResponseEntity<Void> changeUserRole(@RequestBody AdminChangeUserRoleRequest dto, @PathVariable Long id) {
-        adminService.changeUserRole(dto, id);
+    public ResponseEntity<Void> changeUserRole(@RequestBody AdminChangeUserRoleRequest dto, @PathVariable Long id, @AuthenticationPrincipal CustomUserDetails userDetails) {
+        adminService.changeUserRole(dto, id, userDetails.getId());
         return ResponseEntity.noContent().build();
     }
 }

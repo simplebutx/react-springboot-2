@@ -23,16 +23,23 @@ public class AdminService {
     }
 
     @Transactional
-    public void deleteUser(Long id) {
+    public void deleteUser(Long id, Long loginUserId) {
         User user = userRepository.findById(id).
                 orElseThrow(()-> new IllegalArgumentException("유저 없음"));
+        // id가 자기 자신이면 "자신은 삭제할수없습니다"
+        if(id.equals(loginUserId)) {
+            throw new IllegalArgumentException("자기 자신은 삭제할 수 없습니다");
+        }
         userRepository.delete(user);
     }
 
     @Transactional
-    public void changeUserRole(AdminChangeUserRoleRequest dto, Long id) {
+    public void changeUserRole(AdminChangeUserRoleRequest dto, Long id, Long loginUserId) {
         User user = userRepository.findById(id).
                 orElseThrow(()-> new IllegalArgumentException("유저 없음"));
+        if(id.equals(loginUserId)) {
+            throw new IllegalArgumentException("자기 자신은 수정할 수 없습니다");
+        }
         user.updateRole(dto.getRole());
     }
 }
