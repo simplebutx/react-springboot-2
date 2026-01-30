@@ -20,33 +20,23 @@ export default function Home() {
         </p>
       </header>
 
-      <section className="toggle-row">
-        <button
-          className={`toggle-btn ${openTech ? "active" : ""}`}
-          onClick={toggleTech}
-          aria-expanded={openTech}
-        >
-          🧩 기술 스택 보기
-          <span className="chev">{openTech ? "▲" : "▼"}</span>
-        </button>
+<section className="toggle-grid">
+  {/* 왼쪽: 기술 */}
+  <div className="toggle-col">
+    <button
+      className={`toggle-btn ${openTech ? "active" : ""}`}
+      onClick={toggleTech}
+      aria-expanded={openTech}
+    >
+      🧩 기술 스택 보기
+      <span className="chev">{openTech ? "▲" : "▼"}</span>
+    </button>
 
-        <button
-          className={`toggle-btn ${openFeat ? "active" : ""}`}
-          onClick={toggleFeat}
-          aria-expanded={openFeat}
-        >
-          ✅ 핵심 기능 보기
-          <span className="chev">{openFeat ? "▲" : "▼"}</span>
-        </button>
-      </section>
-
-      {openTech && (
-        <section className="info-grid">
-          <div className="info-card">
-            <div className="info-head">
-              <span className="info-dot" />
-              <h3>Frontend</h3>
-            </div>
+    {openTech && (
+      <div className="panel-card">
+        <div className="panel-stack">
+          <div className="panel-item">
+            <h3>Frontend</h3>
             <ul>
               <li>React (Vite)</li>
               <li>React Router</li>
@@ -54,11 +44,8 @@ export default function Home() {
             </ul>
           </div>
 
-          <div className="info-card">
-            <div className="info-head">
-              <span className="info-dot" />
-              <h3>Backend</h3>
-            </div>
+          <div className="panel-item">
+            <h3>Backend</h3>
             <ul>
               <li>Spring Boot</li>
               <li>Spring Security (Session)</li>
@@ -66,27 +53,35 @@ export default function Home() {
             </ul>
           </div>
 
-          <div className="info-card">
-            <div className="info-head">
-              <span className="info-dot" />
-              <h3>DB & Deploy</h3>
-            </div>
+          <div className="panel-item">
+            <h3>DB & Deploy</h3>
             <ul>
               <li>MySQL (AWS RDS)</li>
               <li>Deploy: AWS Elastic Beanstalk</li>
               <li>Static: CloudFront / S3</li>
             </ul>
           </div>
-        </section>
-      )}
+        </div>
+      </div>
+    )}
+  </div>
 
-      {openFeat && (
-        <section className="feature-grid">
-          <div className="feature-card">
-            <div className="feature-head">
-              <span className="feature-dot" />
-              <h3>Authentication (Session)</h3>
-            </div>
+  {/* 오른쪽: 핵심 기능 */}
+  <div className="toggle-col">
+    <button
+      className={`toggle-btn ${openFeat ? "active" : ""}`}
+      onClick={toggleFeat}
+      aria-expanded={openFeat}
+    >
+      ✅ 핵심 기능 보기
+      <span className="chev">{openFeat ? "▲" : "▼"}</span>
+    </button>
+
+    {openFeat && (
+      <div className="panel-card">
+        <div className="panel-stack">
+          <div className="panel-item">
+            <h3>Authentication</h3>
             <ul>
               <li>회원가입 (BCrypt 암호화 저장)</li>
               <li>로그인 (Spring Security 인증)</li>
@@ -95,33 +90,32 @@ export default function Home() {
             </ul>
           </div>
 
-          <div className="feature-card">
-            <div className="feature-head">
-              <span className="feature-dot" />
-              <h3>Authorization (Role)</h3>
-            </div>
+          <div className="panel-item">
+            <h3>Authorization</h3>
             <ul>
-              <li>USER / ADMIN 권한 분리 (관리자 ID: aa / PW: aa)</li>
+              <li>USER / ADMIN 권한 분리</li>
               <li>관리자 전용 API 보호</li>
-              <li>미인증 요청 401 처리</li>
-              <li>권한 부족 403 처리</li>
+              <li>401 / 403 처리</li>
+              <li>관리자 자신 계정 삭제 방지</li>
             </ul>
           </div>
 
-          <div className="feature-card">
-            <div className="feature-head">
-              <span className="feature-dot" />
-              <h3>Pages</h3>
-            </div>
+          <div className="panel-item">
+            <h3>Pages</h3>
             <ul>
-              <li>마이페이지 (내 정보 조회)</li>
-              <li>관리자 페이지 (유저 목록 조회, 권한 변경, 유저 삭제)</li>
-              <li>네비게이션 로그인 상태 반영</li>
-              <li>권한에 따라 메뉴 노출</li>
+              <li>마이페이지</li>
+              <li>관리자 페이지</li>
+              <li>네비 상태 반영</li>
+              <li>권한별 메뉴 노출</li>
             </ul>
           </div>
-        </section>
-      )}
+        </div>
+      </div>
+    )}
+  </div>
+</section>
+
+
     </div>
   );
 }
