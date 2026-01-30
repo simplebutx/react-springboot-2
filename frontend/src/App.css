@@ -1,6 +1,14 @@
 body {
   margin: 0;
-  background: linear-gradient(135deg, #0f172a, #1b1f3a);
+    background: linear-gradient(
+    135deg,
+    #0b1020 0%,
+    #0f172a 50%,
+    #020617 100%
+  );
   color: #e5e7eb;         
   font-family: Arial, Helvetica, sans-serif;
+    background-repeat: no-repeat;
+  background-size: cover;
+  background-attachment: fixed;
 }

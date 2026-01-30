@@ -2,11 +2,13 @@ import { useState } from "react";
 import api from "@/shared/api/axios";
 import '@/features/auth/styles/Login.css';
 import { useNavigate } from "react-router-dom";
+import { useUI } from "@/shared/ui/uiStore";
 
 export default function Login() {
   const nav = useNavigate();
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
+  const ui = useUI();
 
   const onSubmit = async (e) => {
     e.preventDefault();
@@ -19,10 +21,10 @@ export default function Login() {
         headers: { "Content-Type": "application/x-www-form-urlencoded" },
       });
 
-      alert("로그인 성공!");
+      ui.toast("로그인 성공");
       nav("/mypage");
     } catch (e) {
-      alert("로그인 실패");
+      ui.toast("로그인 실패");
     }
   };
 

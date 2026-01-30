@@ -34,4 +34,9 @@ public class User {
         this.name = name;
         this.role = Role.USER;
     }
+    
+    // 역할 수정 함수
+    public void updateRole(Role role) {
+        this.role = role;
+    }
 }

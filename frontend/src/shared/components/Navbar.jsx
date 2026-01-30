@@ -1,12 +1,14 @@
 import { useEffect, useState } from "react";
-import { Link } from "react-router-dom";
 import api from "@/shared/api/axios";
-import { useLocation } from "react-router-dom";
+import { Link, useLocation, useNavigate } from "react-router-dom";
 import '@/shared/styles/Navbar.css';
+import { useUI } from "@/shared/ui/uiStore";
 
 export default function Navbar() {
   const [user, setUser] = useState(null);
   const location = useLocation();
+  const navigate = useNavigate();
+  const ui = useUI();
 
   // 로그인 상태 확인
   useEffect(() => {
@@ -22,12 +24,13 @@ export default function Navbar() {
   const logout = async () => {
     await api.post("/logout");
     setUser(null);
-    window.location.href = "/";
+    ui.toast("로그아웃 완료");
+    navigate("/");
   };
 
   return (
  <nav className="navbar">
-  <Link to="/" className="logo">MyApp</Link>
+  <Link to="/" className="logo">HOME</Link>
 
   <div className="nav-right">
     {user ? (

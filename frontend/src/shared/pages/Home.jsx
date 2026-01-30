@@ -101,7 +101,7 @@ export default function Home() {
               <h3>Authorization (Role)</h3>
             </div>
             <ul>
-              <li>USER / ADMIN 권한 분리</li>
+              <li>USER / ADMIN 권한 분리 (관리자 ID: aa / PW: aa)</li>
               <li>관리자 전용 API 보호</li>
               <li>미인증 요청 401 처리</li>
               <li>권한 부족 403 처리</li>
@@ -115,7 +115,7 @@ export default function Home() {
             </div>
             <ul>
               <li>마이페이지 (내 정보 조회)</li>
-              <li>관리자 페이지 (유저 목록 조회)</li>
+              <li>관리자 페이지 (유저 목록 조회, 권한 변경, 유저 삭제)</li>
               <li>네비게이션 로그인 상태 반영</li>
               <li>권한에 따라 메뉴 노출</li>
             </ul>

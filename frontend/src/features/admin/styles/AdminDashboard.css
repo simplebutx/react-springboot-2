@@ -1,3 +1,7 @@
+/* ===============================
+   Layout
+================================ */
+
 .admin-container {
   display: flex;
   justify-content: center;
@@ -18,6 +22,10 @@
   margin-bottom: 24px;
 }
 
+/* ===============================
+   Table
+================================ */
+
 .admin-table {
   width: 100%;
   border-collapse: collapse;
@@ -25,19 +33,132 @@
 }
 
 .admin-table th {
-  text-align: left;
+  text-align: center;
   padding: 12px;
-   background: #1e293b;
+  background: #1e293b;
   color: #e5e7eb;
   border-bottom: 1px solid #ddd;
 }
 
 .admin-table td {
   padding: 12px;
+  text-align: center;
   color: #e5e7eb;
   border-bottom: 1px solid #334155;
+  vertical-align: middle;
 }
 
 .admin-table tr:hover {
   background: #020617;
+}
+
+/* ===============================
+   Actions Column
+================================ */
+
+.admin-actions {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 10px;
+  flex-wrap: wrap;
+}
+
+/* ===============================
+   Select (Role)
+================================ */
+
+.role-select {
+  height: 36px;
+  padding: 0 12px;
+
+  background: #0f172a;
+  color: #e5e7eb;
+
+  border: 1px solid #334155;
+  border-radius: 10px;
+
+  outline: none;
+  cursor: pointer;
+
+  transition: border-color 0.15s ease, box-shadow 0.15s ease;
+}
+
+.role-select:hover {
+  border-color: #475569;
+}
+
+.role-select:focus {
+  border-color: #60a5fa;
+  box-shadow: 0 0 0 3px rgba(96,165,250,0.25);
+}
+
+.role-select option {
+  background: #0f172a;
+  color: #e5e7eb;
+}
+
+/* ===============================
+   Button Base
+================================ */
+
+.admin-btn {
+  height: 36px;
+  padding: 0 12px;
+
+  border-radius: 10px;
+  font-size: 13px;
+  font-weight: 600;
+
+  cursor: pointer;
+
+  border: 1px solid #334155;
+  background: #111827;
+  color: #e5e7eb;
+
+  transition: background 0.15s ease,
+              border-color 0.15s ease,
+              transform 0.05s ease;
+}
+
+.admin-btn:hover {
+  background: #0b1220;
+  border-color: #475569;
+}
+
+.admin-btn:active {
+  transform: translateY(1px);
+}
+
+.admin-btn:disabled {
+  opacity: 0.55;
+  cursor: not-allowed;
+}
+
+/* ===============================
+   Role Button
+================================ */
+
+.btn-role {
+  border-color: rgba(96,165,250,0.5);
+  background: rgba(96,165,250,0.12);
+}
+
+.btn-role:hover {
+  background: rgba(96,165,250,0.18);
+  border-color: rgba(96,165,250,0.7);
+}
+
+/* ===============================
+   Delete Button
+================================ */
+
+.btn-delete {
+  border-color: rgba(248,113,113,0.5);
+  background: rgba(248,113,113,0.12);
+}
+
+.btn-delete:hover {
+  background: rgba(248,113,113,0.18);
+  border-color: rgba(248,113,113,0.7);
 }

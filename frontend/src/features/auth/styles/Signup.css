@@ -29,24 +29,27 @@
 }
 
 .signup-form input:focus {
-  outline: none;
-  border-color: #4f46e5;
+    outline: none;
+  border-color: #7c3aed;
 }
 
 .signup-form button {
   height: 44px;
   margin-top: 8px;
 
-  background: #4f46e5;
-  color: white;
+  background: #6d28d9;   
+  color: #ffffff;      
   font-size: 15px;
-  font-weight: 600;
+  font-weight: 700;
 
   border: none;
-  border-radius: 6px;
+  border-radius: 8px;
   cursor: pointer;
+
+  transition: background 0.15s ease, transform 0.12s ease;
 }
 
 .signup-form button:hover {
-  background: #4338ca;
+  background: #6d28d9;   
+  transform: translateY(-1px);
 }

@@ -2,21 +2,23 @@ import { useState } from "react";
 import api from "@/shared/api/axios"
 import { useNavigate } from "react-router-dom";
 import '@/features/auth/styles/Signup.css';
+import { useUI } from "@/shared/ui/uiStore";
 
 export default function Signup() {
   const nav = useNavigate();
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [name, setName] = useState("");
+  const ui = useUI();
 
   const onSubmit = async (e) => {
     e.preventDefault();
     try {
       await api.post("/auth/signup", { email, password, name });
-      alert("회원가입 성공!");
+      ui.toast("회원가입 성공!");
       nav("/login");
     } catch (e) {
-      alert("회원가입 실패");
+      ui.toast("회원가입 실패");
     }
   };
 

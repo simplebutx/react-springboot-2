@@ -9,7 +9,6 @@ import Navbar from "./shared/components/Navbar";
 import AdminDashboard from "./features/admin/pages/AdminDashboard";
 
 function App() {
-   console.log("frontend cicd testssssssss");
   return (
     <>
     <Navbar />
