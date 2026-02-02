@@ -23,6 +23,11 @@ export default function PostDetailPage() {
         const res = await api.get(`/post/${id}`); 
         setPost(res.data);
       } catch (err) {
+         if (err?.response?.status === 401) {
+        ui.toast("로그인이 필요합니다.");
+         nav("/login");
+          return;
+  }
         if (!err.response) ui.toast("서버에 연결할 수 없습니다.");
         else if (err.response.status >= 500) ui.toast("서버 오류가 발생했습니다.");
         else {

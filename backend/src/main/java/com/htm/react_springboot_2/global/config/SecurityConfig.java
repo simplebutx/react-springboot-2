@@ -39,7 +39,9 @@ public class SecurityConfig {
                         .requestMatchers("/", "/index.html", "/assets/**", "/favicon.ico").permitAll()
                         .requestMatchers("/api/health").permitAll()
                         .requestMatchers("/api/login", "/api/auth/signup", "/api/logout").permitAll()
-                        .requestMatchers(HttpMethod.GET, "/api/posts/**", "/api/post/{id}").permitAll()
+                        .requestMatchers(HttpMethod.GET, "/api/posts").permitAll()
+                        .requestMatchers(HttpMethod.GET, "/api/posts/{id}").authenticated()
+
                         .requestMatchers(HttpMethod.POST, "/api/posts").authenticated()
                         .requestMatchers(HttpMethod.PUT, "/api/posts").authenticated()
                         .requestMatchers(HttpMethod.DELETE, "/api/posts").authenticated()
