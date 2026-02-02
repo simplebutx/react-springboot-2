@@ -1,0 +1,117 @@
+.postlist-container {
+  min-height: calc(100vh - 80px);
+  padding: 40px 16px;
+  max-width: 900px;
+  margin: 0 auto;
+}
+
+.postlist-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 14px;
+}
+
+.postlist-header h2 {
+  margin: 0;
+  color: #e5e7eb;
+  font-size: 22px;
+}
+
+.postlist-card {
+  background: #1e293b;
+  border-radius: 14px;
+  border: 1px solid rgba(255,255,255,0.06);
+  box-shadow: 0 10px 30px rgba(0,0,0,0.25);
+  overflow: hidden;
+}
+
+.postlist-row {
+  display: grid;
+  grid-template-columns: 1fr 140px 120px;
+  gap: 12px;
+  padding: 12px 14px;
+  align-items: center;
+}
+
+.postlist-row.head {
+  background: rgba(255,255,255,0.04);
+  color: #cbd5e1;
+  font-size: 13px;
+  border-bottom: 1px solid rgba(255,255,255,0.08);
+}
+
+.postlist-row.item {
+  width: 100%;
+  text-align: left;
+  border: 0;
+  background: transparent;
+  cursor: pointer;
+  color: #e5e7eb;
+}
+
+.postlist-row.item:hover {
+  background: rgba(255,255,255,0.05);
+}
+
+.col.title {
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.col.author, .col.date {
+  color: #cbd5e1;
+  font-size: 13px;
+  text-align: right;
+}
+
+.empty {
+  padding: 14px 12px;
+  color: #cbd5e1;
+  background: rgba(255,255,255,0.04);
+  border: 1px solid rgba(255,255,255,0.08);
+  border-radius: 12px;
+  margin-bottom: 12px;
+}
+
+.error {
+  color: #fecaca;
+  background: rgba(239, 68, 68, 0.12);
+  border: 1px solid rgba(239, 68, 68, 0.25);
+  padding: 10px 12px;
+  border-radius: 10px;
+  font-size: 13px;
+  margin-bottom: 12px;
+}
+
+.btn {
+  border: 0;
+  border-radius: 10px;
+  padding: 10px 14px;
+  font-size: 14px;
+  cursor: pointer;
+}
+
+.btn.primary {
+  background: #6366f1;
+  color: white;
+}
+
+.btn.primary:hover {
+  filter: brightness(1.05);
+}
+
+@media (max-width: 560px) {
+  .postlist-row {
+    grid-template-columns: 1fr 90px;
+    grid-template-areas:
+      "title title"
+      "author date";
+    row-gap: 6px;
+  }
+
+  .col.title { grid-area: title; }
+  .col.author { grid-area: author; text-align: left; }
+  .col.date { grid-area: date; text-align: right; }
+}

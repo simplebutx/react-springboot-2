@@ -1,0 +1,124 @@
+.post-detail-container {
+  padding: 60px 16px;
+  display: flex;
+  justify-content: center;
+}
+
+.post-detail-card {
+  width: 860px;
+  max-width: 100%;
+  background: #1e293b;
+  border-radius: 14px;
+  padding: 26px;
+  box-shadow: 0 10px 30px rgba(0,0,0,0.25);
+  border: 1px solid rgba(255,255,255,0.06);
+}
+
+.post-detail-top {
+  padding-bottom: 14px;
+  border-bottom: 1px solid rgba(255,255,255,0.08);
+  margin-bottom: 18px;
+}
+
+.post-title {
+  margin: 0 0 10px;
+  font-size: 22px;
+  color: #e5e7eb;
+  line-height: 1.25;
+}
+
+.post-meta {
+  display: flex;
+  gap: 12px;
+  flex-wrap: wrap;
+  font-size: 13px;
+}
+
+.meta-item {
+  display: inline-flex;
+  gap: 8px;
+  align-items: center;
+  padding: 6px 10px;
+  border-radius: 10px;
+  background: rgba(15, 23, 42, 0.7);
+  border: 1px solid rgba(255,255,255,0.06);
+}
+
+.meta-label {
+  color: #94a3b8;
+}
+
+.meta-value {
+  color: #e2e8f0;
+}
+
+.post-content {
+  white-space: pre-wrap;
+  line-height: 1.7;
+  color: #e5e7eb;
+  font-size: 15px;
+  padding: 6px 2px 18px;
+}
+
+.post-actions {
+  display: flex;
+  justify-content: flex-end;
+  gap: 10px;
+  padding-top: 10px;
+  border-top: 1px solid rgba(255,255,255,0.08);
+  display: flex;
+  gap: 10px;
+}
+
+.btn {
+  height: 40px;
+  padding: 0 14px;
+  border-radius: 10px;
+  cursor: pointer;
+  border: 1px solid transparent;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  text-decoration: none;
+  font-weight: 600;
+  font-size: 14px;
+}
+
+.btn.primary {
+  background: #2563eb;
+  color: white;
+}
+
+.btn.primary:hover {
+  filter: brightness(1.05);
+}
+
+.btn.ghost {
+  background: transparent;
+  color: #e5e7eb;
+  border-color: rgba(255,255,255,0.12);
+}
+
+.btn.ghost:hover {
+  background: rgba(255,255,255,0.06);
+}
+
+.post-detail-skeleton {
+  color: #cbd5e1;
+  padding: 18px 4px;
+}
+
+
+.right-actions {
+  display: flex;
+  gap: 10px;
+}
+
+.btn.danger {
+  background: #ef4444;
+  color: white;
+}
+
+.btn.danger:hover {
+  filter: brightness(1.05);
+}

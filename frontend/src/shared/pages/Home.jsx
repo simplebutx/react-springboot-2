@@ -103,6 +103,7 @@ export default function Home() {
           <div className="panel-item">
             <h3>Pages</h3>
             <ul>
+              <li>게시판 CRUD</li>
               <li>마이페이지</li>
               <li>관리자 페이지</li>
               <li>네비 상태 반영</li>

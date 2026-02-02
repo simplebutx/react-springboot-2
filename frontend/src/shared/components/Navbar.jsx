@@ -30,7 +30,11 @@ export default function Navbar() {
 
   return (
  <nav className="navbar">
+  <div className="nav-left">
   <Link to="/" className="logo">HOME</Link>
+  <Link to="/posts" className="nav-link">게시판</Link>
+  </div>
+
 
   <div className="nav-right">
     {user ? (

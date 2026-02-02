@@ -22,7 +22,7 @@ export default function Login() {
       });
 
       ui.toast("로그인 성공");
-      nav("/mypage");
+      nav("/posts");
     } catch (err) {
         if (!err.response) {
           ui.toast("서버에 연결할 수 없습니다.");

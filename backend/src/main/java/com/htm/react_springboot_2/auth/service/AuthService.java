@@ -23,7 +23,7 @@ public class AuthService {
 
         String hashedPassword = passwordEncoder.encode(dto.getPassword());
 
-        User user = new User(dto.getEmail() , hashedPassword, dto.getName());    // 회원가입 DTO -> Entity로 변환
-        userRepository.save(user);   // repository 호출
+        User user = new User(dto.getEmail() , hashedPassword, dto.getName());
+        userRepository.save(user);
     }
 }

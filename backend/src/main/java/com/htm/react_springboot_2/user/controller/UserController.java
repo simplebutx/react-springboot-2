@@ -14,7 +14,7 @@ public class UserController {
 
     @GetMapping("/api/auth/me")
     public UserMyPageResponse mypage(@AuthenticationPrincipal CustomUserDetails userDetails) {
-        return new UserMyPageResponse(userDetails.getUsername(), userDetails.getName(), userDetails.getRole());
+        return new UserMyPageResponse(userDetails.getId(), userDetails.getUsername(), userDetails.getName(), userDetails.getRole());
         // CustomUserDetails -> DTO 변환
     }
 
