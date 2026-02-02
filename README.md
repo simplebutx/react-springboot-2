@@ -1,194 +1,189 @@
-# React + Spring Boot 포트폴리오 (Session Login / Role / Admin)
+# 🚀 React + Spring Boot Portfolio Project
 
-React 프론트엔드와 Spring Boot 백엔드로 만든 포트폴리오 프로젝트입니다.  
-**세션 기반 로그인(Spring Security)**, **권한(Role) 기반 인가**, **마이페이지**, **관리자(Admin) 기능**을 중심으로 “웹 서비스의 기본 흐름”을 구현했습니다.
+React 프론트엔드와 Spring Boot 백엔드로 구현한 웹 서비스 포트폴리오 프로젝트입니다.  
+세션 기반 인증, 권한(Role) 기반 인가, 관리자 기능, 게시판 CRUD를 중심으로 웹 서비스의 기본 흐름과 서버 아키텍처를 구현했습니다.
 
----
-
-## 1) 핵심 기능
-
-### 인증(Authentication) / 세션(Session)
-- 회원가입: 비밀번호 **BCrypt 암호화 저장**
-- 로그인: Spring Security 인증 성공 시 **세션에 인증 정보 저장**
-- 로그인 유지: 이후 요청에서 세션 기반으로 인증 복원
-- 로그아웃: 세션 무효화
-
-### 인가(Authorization) / Role
-- USER / ADMIN 역할 분리
-- 관리자 전용 API 접근 제한
-
-### 유저 기능(User)
-- 내 정보 조회(마이페이지)
-- (추가 예정/선택) 유저 정보 수정, 프로필 확장 등
-
-### 관리자 기능(Admin)
-- 유저 목록 조회(관리자 전용)
-- (추가 예정/선택) 유저 권한 변경, 계정 잠금 등
+배포 환경에서 GitHub Actions 기반 CI/CD 자동 배포까지 구성했습니다.
 
 ---
 
-## 2) 기술 스택
+## 🔗 Demo
 
-### Backend
-- Java, Spring Boot
-- Spring Security (Session 기반 인증)
-- Spring Data JPA
-- MySQL
-- Lombok
+- URL: https://d1144r6alf0hee.cloudfront.net/
+
+### Demo Account
+
+ADMIN
+id: admin
+pw: 123
+
+USER
+회원가입 후 사용 가능
+
+
+---
+
+## 🛠 Tech Stack
 
 ### Frontend
 - React (Vite)
+- JavaScript (ES6+)
 - Axios
+- React Router
 
-### Infra / Tools
-- (선택) AWS RDS / S3
-- DBeaver(DB 관리)
+### Backend
+- Java 21
+- Spring Boot
+- Spring Security
+- Spring Data JPA (Hibernate)
+
+### Database
+- MySQL (AWS RDS)
+
+### Infra / DevOps
+- AWS S3
+- AWS CloudFront
+- AWS Elastic Beanstalk
+- GitHub Actions
+
+---
+
+## 📌 Architecture
+
+[Client]
+↓
+CloudFront
+↓
+S3 (React)
+↓
+Spring Boot (Elastic Beanstalk)
+↓
+MySQL (RDS)
 
 
 ---
 
-## 3) 프로젝트 구조 (Backend)
+## ✨ Core Features
 
-> 패키지 단위로 관심사를 분리해서 유지보수/확장성을 높였습니다.
-```
-com.htm.react_springboot_2
-├─ admin
-│ ├─ controller (AdminController)
-│ ├─ dto (AdminUserListResponse)
-│ └─ service (AdminService)
+### ✅ Authentication (인증)
+
+- 회원가입  
+  - 비밀번호 BCrypt 암호화 저장
+- 로그인  
+  - Spring Security 기반 인증  
+  - 인증 성공 시 세션에 사용자 정보 저장
+- 로그인 유지  
+  - 이후 요청 시 세션 기반 인증 복원
+- 로그아웃  
+  - 세션 무효화
+
+---
+
+### ✅ Authorization (인가)
+
+- USER / ADMIN 권한 분리
+- 관리자 전용 API 접근 제한
+
+---
+
+### ✅ User
+
+- 마이페이지  
+  - 내 이메일 / 이름 / 권한 조회
+
+---
+
+### ✅ Admin
+
+- 전체 유저 목록 조회
+- 유저 권한 변경 (USER ↔ ADMIN)
+- 유저 삭제  
+  - 자기 자신 삭제 방지 로직 적용
+
+---
+
+### ✅ Board (게시판)
+
+- 게시글 작성
+- 게시글 목록 조회
+- 게시글 상세 조회
+- 게시글 수정
+- 게시글 삭제
+- 작성자 본인만 수정/삭제 가능
+
+---
+
+## 🧱 Backend Design
+
+- Controller / Service / Repository 계층 분리
+- Entity ↔ DTO 분리
+- 비즈니스 로직은 Service 계층에만 위치
+- 트랜잭션 기반 데이터 처리 (`@Transactional`)
+- JPA Dirty Checking 활용
+
+---
+
+## 🔐 Security
+
+- Spring Security Filter Chain 구성
+- BCryptPasswordEncoder 적용
+- 세션 기반 인증 방식 사용
+- Role 기반 API 접근 제어
+
+---
+
+## ⚠ Exception Handling
+
+- 전역 예외 처리 (`@RestControllerAdvice`)
+- Validation 오류 메시지 공통 응답 처리
+- 프론트엔드 Axios Interceptor를 통한 공통 에러 처리
+
+---
+
+## 🔁 CI/CD
+
+### Backend
+
+- GitHub Actions
+- Gradle Build
+- JAR 빌드 후 Elastic Beanstalk 자동 배포
+
+### Frontend
+
+- GitHub Actions
+- React Build
+- S3 업로드
+- CloudFront 캐시 무효화
+
+---
+
+## 📂 Project Structure (Backend)
+
+com.example.project
 ├─ auth
-│ ├─ controller (AuthController)
-│ ├─ domain (CustomUserDetails, Role)
-│ ├─ dto (SignupRequest)
-│ └─ service (AuthService, CustomUserDetailService)
-├─ global
-│ ├─ config (SecurityConfig, WebConfig)
-│ └─ exception (전역 예외 처리/예정)
 ├─ user
-│ ├─ controller (UserController)
-│ ├─ domain (User)
-│ ├─ dto (UserMyPageResponse)
-│ └─ repository (UserRepository)
-├─ HealthController
-└─ ReactSpringboot2Application
-```
+├─ admin
+├─ post
+├─ global
+│ ├─ config
+│ ├─ exception
+│ └─ security
+
 
 ---
 
-## 4) 실행 방법 (로컬)
+## 📈 Why This Project?
 
-### 4-1. Backend 실행
+- 로그인부터 관리자 기능까지 웹 서비스 전체 흐름 경험
+- 인증 / 인가 구조 직접 설계
+- 프론트엔드와 백엔드 분리 배포 경험
+- CI/CD 자동화 경험
 
-#### 1) MySQL DB 생성
+---
 
-```sql
-CREATE DATABASE react_springboot2
-DEFAULT CHARACTER SET utf8mb4;
-```
+## 🔮 Future Improvements
 
-2) application.properties 설정
-```
-spring.datasource.url=jdbc:mysql://localhost:3306/react_springboot2
-spring.datasource.username=YOUR_DB_USER
-spring.datasource.password=YOUR_DB_PASSWORD
-
-spring.jpa.hibernate.ddl-auto=update
-spring.jpa.show-sql=true
-```
-
-3) 서버 실행
-```
-./gradlew bootRun
-또는 IntelliJ에서
-ReactSpringboot2Application 실행
-```
-
-### 4-2. Frontend 실행
-```
-npm install
-npm run dev
-```
-
-## 5) 환경 변수 (Frontend)
-.env
-```
-VITE_API_BASE_URL=http://localhost:8080
-```
-
-## 6) API 요약
-
-Auth
-
-POST /api/auth/signup : 회원가입
-
-POST /api/auth/login : 로그인 (세션 생성)
-
-POST /logout : 로그아웃
-
-GET /api/auth/me : 로그인 사용자 정보 확인
-
-User
-
-GET /api/users/me : 마이페이지(내 정보)
-
-Admin (ADMIN 권한 필요)
-
-GET /api/admin/users : 전체 유저 목록
-
-Health
-
-GET /api/health : 서버 상태 확인
-
-
-
-## 7) Security 설계 요약
-
-- Spring Security FilterChain에서 요청을 먼저 가로채 인증/인가 처리
-
-- 로그인 성공 시 SecurityContext가 세션에 저장
-
-- 이후 요청에서 세션 기반으로 인증 정보가 복원됨
-
-핵심 구성 요소
-
-- CustomUserDetailService: 로그인 시 유저 조회
-
-- CustomUserDetails: User(Entity)를 감싸 Spring Security가 이해하는 인증 정보 제공
-
-- SecurityConfig: 접근 규칙/로그인 처리/예외 처리 등 보안 정책 정의
-
-
-## 8) 트러블슈팅
-
-## 9) 스크린샷 / 데모
-
-## 10) 배포
-배포 아키텍처
-
-- Frontend: S3 정적 호스팅 + CloudFront
-
-- Backend API: AWS Elastic Beanstalk (Spring Boot JAR 배포)
-
-- Database: AWS RDS (MySQL)
-
-도메인/세션 동작
-
-- 사용자는 CloudFront 도메인으로 접속
-
-- 프론트가 API 요청을 Elastic Beanstalk로 전달
-
-- 세션 기반 인증(JSESSIONID) 을 사용하므로,
-
-  - Axios 요청에 withCredentials: true 설정
-
-  - 백엔드에서 CORS에 allowCredentials(true) + 허용 Origin 지정
-
-CI/CD
-
-- GitHub Actions → Elastic Beanstalk 자동 배포
-
-   - main 브랜치 push 시 ./gradlew clean bootJar
-
-   - 생성된 JAR을 EB로 배포
-
-
+- 댓글 기능
+- 게시글 검색
+- 페이지네이션
+- 이미지 업로드 (AWS S3)
