@@ -3,6 +3,7 @@ import { useNavigate } from "react-router-dom";
 import api from "@/shared/api/axios";
 import "@/features/posts/styles/PostCreate.css";
 import { useUI } from "@/shared/ui/uiStore";
+import { getErrorMessage } from "@/shared/utils/getErrorMessage";
 
 export default function PostCreatePage() {
   const nav = useNavigate();
@@ -13,16 +14,6 @@ export default function PostCreatePage() {
 
   const onSubmit = async (e) => {
     e.preventDefault();
-
-    if (!title.trim()) {
-      ui.toast("제목을 입력해주세요.");
-      return;
-    }
-
-    if (!content.trim()) {
-      ui.toast("내용을 입력해주세요.");
-      return;
-    }
 
     try {
       await api.post("/posts", {
@@ -43,12 +34,7 @@ export default function PostCreatePage() {
         return;
       }
 
-      const msg =
-        err?.response?.data?.message ||
-        err?.response?.data ||
-        "글 작성에 실패했습니다.";
-
-      ui.toast(String(msg));
+      ui.toast(getErrorMessage(err, "글쓰기 실패"));
     }
   };
 

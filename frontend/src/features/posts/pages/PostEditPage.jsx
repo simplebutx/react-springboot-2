@@ -3,6 +3,7 @@ import { useNavigate, useParams } from "react-router-dom";
 import api from "@/shared/api/axios";
 import "@/features/posts/styles/PostEdit.css";
 import { useUI } from "@/shared/ui/uiStore";
+import { getErrorMessage } from "@/shared/utils/getErrorMessage";
 
 export default function PostEditPage() {
   const { id } = useParams();
@@ -35,9 +36,6 @@ export default function PostEditPage() {
   const onSubmit = async (e) => {
     e.preventDefault();
 
-    if (!title.trim()) return ui.toast("제목을 입력해주세요.");
-    if (!content.trim()) return ui.toast("내용을 입력해주세요.");
-
     try {
       await api.put(`/post/${id}`, {
         title: title.trim(),
@@ -49,12 +47,7 @@ export default function PostEditPage() {
     } catch (err) {
       if (!err.response) return ui.toast("서버에 연결할 수 없습니다.");
       if (err.response.status >= 500) return ui.toast("서버 오류가 발생했습니다.");
-
-      const msg =
-        err?.response?.data?.message ||
-        err?.response?.data ||
-        "수정에 실패했습니다.";
-      ui.toast(String(msg));
+      ui.toast(getErrorMessage(err, "글쓰기 실패"));
     }
   };
 
