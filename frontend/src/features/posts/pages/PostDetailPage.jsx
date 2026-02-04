@@ -2,7 +2,7 @@ import { useEffect, useState } from "react";
 import { useNavigate, useParams } from "react-router-dom";
 import api from "@/shared/api/axios";
 import "@/features/posts/styles/PostDetail.css";
-import Comments from "@/features/posts/components/comments";
+import Comments from "@/features/posts/components/Comments";
 import { useUI } from "@/shared/ui/uiStore";
 import { getErrorMessage } from "@/shared/utils/getErrorMessage";
 
