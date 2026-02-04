@@ -3,6 +3,7 @@ import { useNavigate, useParams } from "react-router-dom";
 import api from "@/shared/api/axios";
 import "@/features/posts/styles/PostDetail.css";
 import { useUI } from "@/shared/ui/uiStore";
+import { getErrorMessage } from "@/shared/utils/getErrorMessage";
 
 export default function PostDetailPage() {
   const { id } = useParams();
@@ -31,11 +32,7 @@ export default function PostDetailPage() {
         if (!err.response) ui.toast("서버에 연결할 수 없습니다.");
         else if (err.response.status >= 500) ui.toast("서버 오류가 발생했습니다.");
         else {
-          const msg =
-            err?.response?.data?.message ||
-            err?.response?.data ||
-            "게시글을 불러오지 못했습니다.";
-          ui.toast(String(msg));
+          ui.toast(getErrorMessage(err, "불러오기 실패"));
         }
         nav("/posts");
       }
@@ -55,11 +52,7 @@ export default function PostDetailPage() {
       if (!err.response) ui.toast("서버에 연결할 수 없습니다.");
       else if (err.response.status >= 500) ui.toast("서버 오류가 발생했습니다.");
       else {
-        const msg =
-          err?.response?.data?.message ||
-          err?.response?.data ||
-          "삭제에 실패했습니다.";
-        ui.toast(String(msg));
+        ui.toast(getErrorMessage(err, "삭제 실패"));
       }
     }
   };

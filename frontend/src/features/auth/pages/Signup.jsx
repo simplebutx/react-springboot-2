@@ -19,7 +19,11 @@ export default function Signup() {
       ui.toast("회원가입 성공!");
       nav("/login");
     } catch (err) {
-      ui.toast(getErrorMessage(err, "회원가입 실패"));
+      if (!err.response) ui.toast("서버에 연결할 수 없습니다.");
+        else if (err.response.status >= 500) ui.toast("서버 오류가 발생했습니다.");
+        else {
+          ui.toast(getErrorMessage(err, "회원가입 실패"));
+        }
     }
   };
 

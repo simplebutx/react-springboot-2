@@ -2,10 +2,11 @@
   display: flex;
   justify-content: center;
   margin-top: 80px;
+  margin-bottom: 40px;
 }
 
 .mypage-card {
-  width: 420px;
+  width: 500px;
   padding: 32px;
 
   background: #1e293b;
@@ -21,8 +22,7 @@
 .row {
   display: flex;
   align-items: center;
-   gap: 12px;  
-  /* justify-content: space-between; */
+  gap: 12px;  
   padding: 12px 0;
   border-bottom: 1px solid #eee;
   font-size: 14px;
@@ -38,4 +38,61 @@
 
 .row span:last-child {
   font-weight: 600;
+}
+
+/* ===============================
+   MyPage Actions
+================================ */
+
+.mypage-actions {
+  margin-top: 16px;
+  display: flex;
+  justify-content: flex-start;  
+}
+
+/* ===============================
+   MyPage Button (Admin Button Style)
+================================ */
+
+.mypage-btn {
+  height: 36px;
+  padding: 0 12px;
+
+  border-radius: 10px;
+  font-size: 13px;
+  font-weight: 600;
+
+  cursor: pointer;
+
+  border: 1px solid #334155;
+  background: #111827;
+  color: #e5e7eb;
+
+  transition: background 0.15s ease,
+              border-color 0.15s ease,
+              transform 0.05s ease;
+}
+
+.mypage-btn:hover {
+  background: #0b1220;
+  border-color: #475569;
+}
+
+.mypage-btn:active {
+  transform: translateY(1px);
+}
+
+.mypage-btn:disabled {
+  opacity: 0.55;
+  cursor: not-allowed;
+}
+
+.mypage-btn.btn-delete {
+  border-color: rgba(248,113,113,0.5);
+  background: rgba(248,113,113,0.12);
+}
+
+.mypage-btn.btn-delete:hover {
+  background: rgba(248,113,113,0.18);
+  border-color: rgba(248,113,113,0.7);
 }

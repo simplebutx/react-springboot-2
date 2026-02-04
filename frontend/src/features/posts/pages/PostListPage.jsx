@@ -2,33 +2,36 @@ import { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import api from "@/shared/api/axios";
 import "@/features/posts/styles/PostList.css";
+import { useUI } from "@/shared/ui/uiStore";
+import { getErrorMessage } from "@/shared/utils/getErrorMessage";
 
 export default function PostListPage() {
   const nav = useNavigate();
+  const ui = useUI();
 
   const [posts, setPosts] = useState([]);
-  const [error, setError] = useState("");
 
   useEffect(() => {
-    let ignore = false;
-
-    api.get("/posts")
-      .then((res) => {
-        if (ignore) return;
+    const fetchPosts = async () => {
+      try {
+        const res = await api.get("/posts");
         setPosts(Array.isArray(res.data) ? res.data : []);
-      })
-      .catch((err) => {
-        if (ignore) return;
-        const msg =
-          err?.response?.data?.message ||
-          err?.response?.data ||
-          "목록 조회 실패";
-        setError(String(msg));
-      });
+      } catch (err) {
 
-    return () => {
-      ignore = true;
+        if (!err.response) { ui.toast("서버에 연결할 수 없습니다.");
+          return;
+        }
+
+        if (err.response.status >= 500) {
+          ui.toast("서버 오류가 발생했습니다.");
+          return;
+        }
+
+        ui.toast(getErrorMessage(err, "목록 조회 실패"));
+      }
     };
+
+    fetchPosts();
   }, []);
 
   const formatDate = (isoString) => {
@@ -49,9 +52,7 @@ export default function PostListPage() {
         </button>
       </div>
 
-      {error && <div className="error">{error}</div>}
-
-      {!error && posts.length === 0 && (
+      {posts.length === 0 && (
         <div className="empty">아직 게시글이 없습니다.</div>
       )}
 
