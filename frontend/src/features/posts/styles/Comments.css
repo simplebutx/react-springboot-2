@@ -1,0 +1,130 @@
+.comment-item {
+  padding: 12px 14px;
+  border-radius: 12px;
+  background: rgba(15, 23, 42, 0.55);
+  border: 1px solid rgba(148, 163, 184, 0.14);
+}
+
+.comments-title {
+  font-size: 15px;
+  font-weight: 700;
+  color: rgba(226, 232, 240, 0.95);
+  margin-bottom: 10px;
+  letter-spacing: -0.2px;
+}
+
+.comments-list {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  margin-bottom: 14px;
+}
+
+
+.comment-row{
+  display: grid;
+  grid-template-columns: 40px 1fr auto;
+  gap: 12px;
+  align-items: center;
+}
+
+.comment-author {
+  font-size: 13px;
+  font-weight: 600;
+  color: #93c5fd;
+  white-space: nowrap;
+}
+
+.comment-content {
+  font-size: 14px;
+  color: rgba(226,232,240,0.95);
+  word-break: break-word;
+}
+
+.comment-date {
+  margin-top: 10px;
+  font-size: 12px;
+  color: rgba(226,232,240,0.45);
+  padding-left: 50px; 
+}
+
+
+.comment-item-actions{
+  display: flex;
+  gap: 18px;          
+  align-items: center;
+}
+
+.comment-item-actions button{
+  background: none;
+  border: none;
+  padding: 0;
+  font-size: 13px;
+  font-weight: 500;
+  color: rgba(226,232,240,0.6);
+  cursor: pointer;
+}
+
+.comment-item-actions button:hover{
+  text-decoration: underline;
+}
+
+
+.comment-form {
+  display: flex;
+  gap: 10px;
+  align-items: center;
+
+  padding: 12px 14px;
+  border-radius: 12px;
+  background: rgba(2, 6, 23, 0.25);
+  border: 1px solid rgba(148, 163, 184, 0.14);
+}
+
+.comment-input {
+  flex: 1;
+  height: 42px;
+  padding: 0 12px;
+  border-radius: 10px;
+  border: 1px solid rgba(148, 163, 184, 0.18);
+  background: rgba(15, 23, 42, 0.85);
+  color: rgba(226, 232, 240, 0.95);
+  outline: none;
+  font-size: 14px;
+}
+
+.comment-input::placeholder {
+  color: rgba(226, 232, 240, 0.45);
+}
+
+.comment-input:focus {
+  border-color: rgba(99, 102, 241, 0.55);
+  box-shadow: 0 0 0 3px rgba(99, 102, 241, 0.18);
+}
+
+.comment-form button{
+  background: none;
+  border: none;
+  padding: 0;
+  font-size: 14px;
+  font-weight: 600;
+  color: #93c5fd;
+  cursor: pointer;
+}
+
+.comment-form button:hover{
+  text-decoration: underline;
+}
+
+@media (max-width: 520px) {
+  .comment-row{
+    grid-template-columns: 40px 1fr;
+    row-gap: 6px;
+  }
+
+  .comment-item-actions{
+    justify-content: flex-end;
+    grid-column: 1 / -1;
+    gap: 14px;
+  }
+}

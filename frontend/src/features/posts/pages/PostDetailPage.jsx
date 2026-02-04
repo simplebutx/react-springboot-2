@@ -2,8 +2,11 @@ import { useEffect, useState } from "react";
 import { useNavigate, useParams } from "react-router-dom";
 import api from "@/shared/api/axios";
 import "@/features/posts/styles/PostDetail.css";
+import Comments from "@/features/posts/components/comments";
 import { useUI } from "@/shared/ui/uiStore";
 import { getErrorMessage } from "@/shared/utils/getErrorMessage";
+
+
 
 export default function PostDetailPage() {
   const { id } = useParams();
@@ -60,54 +63,55 @@ export default function PostDetailPage() {
   if (!post) return null;
 
   return (
-    <div className="post-detail-container">
-      <div className="post-detail-card">
-        <div className="post-detail-top">
-          <h2 className="post-title">{post.title}</h2>
+ <div className="post-detail-container">
+  <div className="post-detail-card">
+    <div className="post-detail-top">
+      <h2 className="post-title">{post.title}</h2>
 
-          <div className="post-meta">
-            <span className="meta-item">
-              <span className="meta-label">작성자</span>
-              <span className="meta-value">{post.authorName ?? "-"}</span>
-            </span>
+      <div className="post-meta">
+        <span className="meta-item">
+          <span className="meta-label">작성자</span>
+          <span className="meta-value">{post.authorName ?? "-"}</span>
+        </span>
 
-            <span className="meta-item">
-              <span className="meta-label">작성일</span>
-              <span className="meta-value">{formatDate(post.createdAt)}</span>
-            </span>
-          </div>
-        </div>
-
-        <div className="post-content">{post.content}</div>
-
-        <div className="post-actions">
-          <button className="btn ghost" onClick={() => nav(-1)}>
-            뒤로
-          </button>
-
-          <div className="right-actions">
-
-            {post.canEdit && (
-              <button
-                className="btn ghost"
-                onClick={() => nav(`/posts/${id}/edit`)}
-              >
-                수정
-              </button>
-            )}
-
-            {post.canDelete && (
-              <button className="btn danger" onClick={onDelete}>
-                삭제
-              </button>
-            )}
-
-            <button className="btn primary" onClick={() => nav("/posts")}>
-              목록
-            </button>
-          </div>
-        </div>
+        <span className="meta-item">
+          <span className="meta-label">작성일</span>
+          <span className="meta-value">{formatDate(post.createdAt)}</span>
+        </span>
       </div>
     </div>
+
+    <div className="post-content">{post.content}</div>
+
+    <div className="post-actions">
+      <button className="btn ghost" onClick={() => nav(-1)}>
+        뒤로
+      </button>
+
+      <div className="right-actions">
+        {post.canEdit && (
+          <button className="btn ghost" onClick={() => nav(`/posts/${id}/edit`)}>
+            수정
+          </button>
+        )}
+
+        {post.canDelete && (
+          <button className="btn danger" onClick={onDelete}>
+            삭제
+          </button>
+        )}
+
+        <button className="btn primary" onClick={() => nav("/posts")}>
+          목록
+        </button>
+      </div>
+    </div>
+  </div>
+
+  <div className="comments-section">
+    <Comments />
+  </div>
+</div>
+
   );
 }

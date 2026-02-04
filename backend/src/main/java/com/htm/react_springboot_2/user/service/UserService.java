@@ -30,9 +30,7 @@ public class UserService {
     public List<PostListResponse> getMyPosts(Long userId) {
         return postRepository.findByAuthorId(userId)
                 .stream()
-                .map(post -> new PostListResponse(
-                        post.getId(), post.getTitle(), post.getAuthor().getName(), post.getCreatedAt()
-                ))
+                .map(post -> new PostListResponse(post.getId(), post.getTitle(), post.getAuthor().getName(), post.getCreatedAt()))
                 .toList();
 
     }
