@@ -39,7 +39,7 @@ public class PostService {
         postRepository.save(post);
     }
 
-
+    @Transactional(readOnly = true)
     public PostDetailResponse getPostDetail(Long postId, Long loginUserId, Role role) {
         Post post = postRepository.findById(postId)
                 .orElseThrow(()->new IllegalArgumentException("게시글 없음"));
@@ -51,7 +51,6 @@ public class PostService {
                 post.getAuthor().getName(), post.getAuthor().getId(), post.getCreatedAt(),
                 isAuthor, isAuthor || isAdmin);
     }
-
 
     @Transactional
     public void updatePost(PostUpdateRequest dto, Long postId, Long loginUserId) {

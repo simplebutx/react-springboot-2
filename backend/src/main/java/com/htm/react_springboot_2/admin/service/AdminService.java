@@ -4,9 +4,10 @@ import com.htm.react_springboot_2.admin.dto.AdminChangeUserRoleRequest;
 import com.htm.react_springboot_2.admin.dto.AdminUserListResponse;
 import com.htm.react_springboot_2.user.domain.User;
 import com.htm.react_springboot_2.user.repository.UserRepository;
-import jakarta.transaction.Transactional;
+
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
 
@@ -15,6 +16,7 @@ import java.util.List;
 public class AdminService {
     private final UserRepository userRepository;
 
+    @Transactional(readOnly = true)
     public List<AdminUserListResponse> getUserList() {
         return userRepository.findAll()
                 .stream()
@@ -26,7 +28,6 @@ public class AdminService {
     public void deleteUser(Long id, Long loginUserId) {
         User user = userRepository.findById(id).
                 orElseThrow(()-> new IllegalArgumentException("유저 없음"));
-        // id가 자기 자신이면 "자신은 삭제할수없습니다"
         if(id.equals(loginUserId)) {
             throw new IllegalArgumentException("자기 자신은 삭제할 수 없습니다");
         }

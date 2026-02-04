@@ -7,6 +7,7 @@ import com.htm.react_springboot_2.post.dto.PostDetailResponse;
 import com.htm.react_springboot_2.post.dto.PostListResponse;
 import com.htm.react_springboot_2.post.dto.PostUpdateRequest;
 import com.htm.react_springboot_2.post.service.PostService;
+import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.core.annotation.AuthenticationPrincipal;
@@ -25,7 +26,7 @@ public class PostController {
     }
 
     @PostMapping("/api/posts")
-    public ResponseEntity<Void> createPost(@RequestBody PostCreateRequest dto,
+    public ResponseEntity<Void> createPost(@Valid @RequestBody PostCreateRequest dto,
                                            @AuthenticationPrincipal CustomUserDetails userDetails) {
         postService.createPost(dto, userDetails.getUsername());
         return ResponseEntity.noContent().build();
@@ -38,7 +39,7 @@ public class PostController {
 
 
     @PutMapping("/api/post/{id}")
-    public ResponseEntity<Void> updatePost(@RequestBody PostUpdateRequest dto,
+    public ResponseEntity<Void> updatePost(@Valid @RequestBody PostUpdateRequest dto,
                                            @PathVariable Long id,
                                            @AuthenticationPrincipal CustomUserDetails userDetails) {
         postService.updatePost(dto, id, userDetails.getId());
@@ -53,3 +54,6 @@ public class PostController {
         return ResponseEntity.noContent().build();
     }
 }
+
+// ResponseEntity 클래스 = “HTTP 응답 전체를 담는 그릇” 클래스
+// HTTP 응답에는 : 상태코드 (200,401), 헤더, 바디(JSON 데이터)가 있다 -> ResponseEntity는 이걸 전부 담음

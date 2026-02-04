@@ -8,7 +8,7 @@ import lombok.Getter;
 public class SignupRequest {
 
     // 회원가입용 DTO
-    @Email(message = "이메일 형식이 올바르지 않습니다.")   // 이메일 형식 자동검증
+    @Email(message = "이메일 형식이 올바르지 않습니다.")
     @NotBlank(message = "이메일은 필수입니다.")
     public String email;
 

@@ -5,9 +5,6 @@ import org.springframework.web.bind.MethodArgumentNotValidException;
 import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.RestControllerAdvice;
 
-import javax.naming.AuthenticationException;
-import java.nio.file.AccessDeniedException;
-
 @RestControllerAdvice
 public class GlobalExceptionHandler {
     @ExceptionHandler(IllegalArgumentException.class)
@@ -21,6 +18,7 @@ public class GlobalExceptionHandler {
     @ExceptionHandler(MethodArgumentNotValidException.class)
     public ResponseEntity<ErrorResponse> handleValidation(MethodArgumentNotValidException e) {
 
+        // 유효성 검사에서 실패한 에러메세지 중 첫번째 하나만 뽑아오는 로직
         String msg = e.getBindingResult()
                 .getFieldErrors()
                 .stream()

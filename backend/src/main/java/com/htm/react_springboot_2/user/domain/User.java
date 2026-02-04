@@ -7,10 +7,7 @@ import lombok.AccessLevel;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 
-@NoArgsConstructor(access = AccessLevel.PROTECTED)  // 기본생성자 추가
-// AccessLevel.PROTECTED: 기본 생성자는 JPA만 쓰게하고, 외부에서는 마음대로 new 하지 못하게 막겠다
-// @NoArgsConstructor 쓰는이유: JPA는 DB에서 데이터를 조회할때 빈 Post 객체를 생성하고, (기본생성자 이용)
-// 그다음 필드값들을 채우기 때문에 반드시 기본 생성자가 필요하다
+@NoArgsConstructor(access = AccessLevel.PROTECTED)  // 기본생성자
 @Entity
 @Table(name="users")
 @Getter
