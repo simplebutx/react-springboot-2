@@ -24,17 +24,9 @@ export default function PostCreatePage() {
       ui.toast("글이 등록되었습니다.");
       nav("/posts");
     } catch (err) {
-      if (!err.response) {
-        ui.toast("서버에 연결할 수 없습니다.");
-        return;
-      }
-
-      if (err.response.status >= 500) {
-        ui.toast("서버 오류가 발생했습니다.");
-        return;
-      }
-
-      ui.toast(getErrorMessage(err, "글쓰기 실패"));
+      if (!err.response) ui.toast("서버에 연결할 수 없습니다.");
+        else if (err.response.status >= 500)  ui.toast("서버 오류가 발생했습니다.");
+        else ui.toast(getErrorMessage(err, "글쓰기 실패"));
     }
   };
 

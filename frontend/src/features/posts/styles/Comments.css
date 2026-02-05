@@ -116,6 +116,63 @@
   text-decoration: underline;
 }
 
+
+.comment-edit{
+  grid-column: 2 / -1;        
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  min-width: 0;                
+}
+
+
+.comment-edit-input{
+  flex: 1;
+  height: 34px;
+  padding: 0 10px;
+  border-radius: 10px;
+  border: 1px solid rgba(148, 163, 184, 0.18);
+  background: rgba(15, 23, 42, 0.85);
+  color: rgba(226, 232, 240, 0.95);
+  outline: none;
+  font-size: 14px;
+  min-width: 0;
+}
+
+.comment-edit-input:focus{
+  border-color: rgba(99, 102, 241, 0.55);
+  box-shadow: 0 0 0 3px rgba(99, 102, 241, 0.18);
+}
+
+
+.comment-edit-actions{
+  display: flex;
+  gap: 12px;
+  align-items: center;
+  flex-shrink: 0;
+}
+
+.comment-edit-actions button{
+  background: none;
+  border: none;
+  padding: 0;
+  font-size: 13px;
+  font-weight: 600;
+  color: rgba(226,232,240,0.75);
+  cursor: pointer;
+}
+
+.comment-edit-actions button:hover{
+  text-decoration: underline;
+}
+
+@media (max-width: 520px){
+  .comment-edit{
+    grid-column: 1 / -1;        
+  }
+}
+
+
 @media (max-width: 520px) {
   .comment-row{
     grid-template-columns: 40px 1fr;

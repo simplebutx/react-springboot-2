@@ -15,11 +15,20 @@ export default function PostDetailPage() {
 
   const [post, setPost] = useState(null);
 
-  const formatDate = (value) => {
-    if (!value) return "-";
-    const d = new Date(value);
-    return Number.isNaN(d.getTime()) ? String(value) : d.toLocaleString();
-  };
+const formatDate = (value) => {
+  if (!value) return "-";
+
+  const d = new Date(value);
+  if (Number.isNaN(d.getTime())) return String(value);
+
+  const yyyy = d.getFullYear();
+  const mm = String(d.getMonth() + 1).padStart(2, "0");
+  const dd = String(d.getDate()).padStart(2, "0");
+  const hh = String(d.getHours()).padStart(2, "0");
+  const min = String(d.getMinutes()).padStart(2, "0");
+
+  return `${yyyy}-${mm}-${dd} ${hh}:${min}`;
+};
 
   useEffect(() => {
     const fetchPost = async () => {
@@ -28,15 +37,14 @@ export default function PostDetailPage() {
         setPost(res.data);
       } catch (err) {
          if (err?.response?.status === 401) {
-        ui.toast("로그인이 필요합니다.");
-         nav("/login");
-          return;
-  }
+            ui.toast("로그인이 필요합니다.");
+            nav("/login");
+            return;
+        }
         if (!err.response) ui.toast("서버에 연결할 수 없습니다.");
         else if (err.response.status >= 500) ui.toast("서버 오류가 발생했습니다.");
-        else {
-          ui.toast(getErrorMessage(err, "불러오기 실패"));
-        }
+        else ui.toast(getErrorMessage(err, "불러오기 실패"));
+
         nav("/posts");
       }
     };
