@@ -83,3 +83,41 @@
   color: #e5e7eb;
   border-color: rgba(255,255,255,0.12);
 }
+
+.post-image {
+  width: 100%;
+  height: 320px;           
+  border-radius: 12px;
+  background: #0f172a;
+  overflow: hidden;
+
+  display: flex;              
+  align-items: center;
+  justify-content: center;
+}
+
+.post-image img {
+  width: 100%;
+  height: 100%;
+  object-fit: contain;       
+  display: block;
+}
+
+.post-edit-image {
+  width: 100%;
+  height: 150px;
+  background: #0f172a;
+  border-radius: 12px;
+  overflow: hidden;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.post-edit-image img {
+  max-width: 360px;  
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
+}

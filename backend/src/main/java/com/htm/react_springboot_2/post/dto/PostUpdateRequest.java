@@ -10,4 +10,6 @@ public class PostUpdateRequest {
 
     @NotBlank(message = "내용을 입력해주세요.")
     public String content;
+
+    private String imageKey;
 }

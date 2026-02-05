@@ -115,9 +115,12 @@ export default function Home() {
             <h3>Features</h3>
             <ul>
               <li>게시판 CRUD (작성자만 수정/삭제 권한, 관리자 전체 삭제 권한)</li>
-              <li>마이페이지 (가입자 정보)</li>
+              <li>마이페이지 (가입자 정보, 작성 글 목록 조회, 회원탈퇴)</li>
               <li>관리자 페이지 (회원정보, 권한변경, 회원삭제)</li>
               <li>권한별 메뉴 노출 (네비 상태 반영)</li>
+              <li>댓글 CRUD</li>
+              <li>게시글 이미지 업로드 (AWS S3 Presigned URL)</li>
+              <li>Swagger API 문서화</li>
             </ul>
           </div>
         </div>

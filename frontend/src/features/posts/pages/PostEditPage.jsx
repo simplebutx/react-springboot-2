@@ -4,6 +4,7 @@ import api from "@/shared/api/axios";
 import "@/features/posts/styles/PostEdit.css";
 import { useUI } from "@/shared/ui/uiStore";
 import { getErrorMessage } from "@/shared/utils/getErrorMessage";
+import ImageUploader from "@/features/posts/components/ImageUploader";
 
 export default function PostEditPage() {
   const { id } = useParams();
@@ -14,6 +15,9 @@ export default function PostEditPage() {
   const [content, setContent] = useState("");
   const [loading, setLoading] = useState(true);
 
+  const [imageKey, setImageKey] = useState("");
+  const S3_BASE_URL = "https://nth827.s3.ap-northeast-2.amazonaws.com";
+
 
   useEffect(() => {
     const fetchDetail = async () => {
@@ -21,6 +25,7 @@ export default function PostEditPage() {
         const res = await api.get(`/post/${id}`);
         setTitle(res.data?.title ?? "");
         setContent(res.data?.content ?? "");
+        setImageKey(res.data?.imageKey ?? "");
       } catch (err) {
         ui.toast("게시글을 불러오지 못했습니다.");
         nav("/posts");
@@ -40,6 +45,7 @@ export default function PostEditPage() {
       await api.put(`/post/${id}`, {
         title: title.trim(),
         content: content.trim(),
+        imageKey: imageKey || null,
       });
 
       ui.toast("수정 완료");
@@ -84,6 +90,25 @@ export default function PostEditPage() {
               rows={10}
             />
           </label>
+
+          {imageKey && (
+            <div className="field">
+              <span className="label">현재 이미지</span>
+              <div className="post-image">
+                <img src={`${S3_BASE_URL}/${imageKey}`} alt="current" />
+              </div>
+
+              <button
+                type="button"
+                className="btn ghost"
+                onClick={() => setImageKey("")}
+              >
+                이미지 제거
+              </button>
+            </div>
+          )}
+
+          <ImageUploader onUploaded={(key) => setImageKey(key)} />
 
           <div className="actions">
             <button

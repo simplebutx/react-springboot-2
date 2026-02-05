@@ -124,6 +124,24 @@
   padding: 18px 4px;
 }
 
+.post-image {
+  width: 100%;
+  height: 320px;         
+  border-radius: 12px;
+  background: #0f172a;
+  overflow: hidden;
+
+  display: flex;          
+  align-items: center;
+  justify-content: center;
+}
+
+.post-image img {
+  width: 100%;
+  height: 100%;
+  object-fit: contain;       
+  display: block;
+}
 
 @media (max-width: 520px) {
   .post-actions {

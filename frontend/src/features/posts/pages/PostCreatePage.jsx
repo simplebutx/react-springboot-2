@@ -4,6 +4,7 @@ import api from "@/shared/api/axios";
 import "@/features/posts/styles/PostCreate.css";
 import { useUI } from "@/shared/ui/uiStore";
 import { getErrorMessage } from "@/shared/utils/getErrorMessage";
+import ImageUploader from "@/features/posts/components/ImageUploader";
 
 export default function PostCreatePage() {
   const nav = useNavigate();
@@ -12,6 +13,8 @@ export default function PostCreatePage() {
   const [title, setTitle] = useState("");
   const [content, setContent] = useState("");
 
+  const [imageKey, setImageKey] = useState("");
+
   const onSubmit = async (e) => {
     e.preventDefault();
 
@@ -19,6 +22,7 @@ export default function PostCreatePage() {
       await api.post("/posts", {
         title: title.trim(),
         content: content.trim(),
+        imageKey: imageKey || null
       });
 
       ui.toast("글이 등록되었습니다.");
@@ -55,6 +59,8 @@ export default function PostCreatePage() {
               rows={10}
             />
           </label>
+
+          <ImageUploader onUploaded={(key) => setImageKey(key)} />
 
           <div className="actions">
             <button

@@ -24,16 +24,22 @@ public class Post {
     @JoinColumn(name = "user_id")
     private User author;
 
-    public Post(String title, String content, User author) {
+    @Column(name = "image_key")
+    private String imageKey;
+
+    public Post(String title, String content, String imageKey, User author) {
         this.title = title;
         this.content = content;
+        this.imageKey = imageKey;
         this.author = author;
         this.createdAt = LocalDateTime.now();
+
     }
 
-    public void updatePost(String title, String content) {
+    public void updatePost(String title, String content, String imageKey) {
         this.title = title;
         this.content = content;
+        this.imageKey = imageKey;
     }
 
 }

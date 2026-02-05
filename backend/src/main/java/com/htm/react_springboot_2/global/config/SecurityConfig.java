@@ -40,6 +40,11 @@ public class SecurityConfig {
                         .requestMatchers("/api/health").permitAll()
                         .requestMatchers("/api/login", "/api/auth/signup", "/api/logout").permitAll()
                         .requestMatchers(HttpMethod.GET, "/api/posts").permitAll()
+                        .requestMatchers(
+                                "/swagger-ui/**",
+                                "/v3/api-docs/**",
+                                "/api/images/presign"
+                        ).permitAll()   // ------------임시 ------------- 삭제필수!
                         .requestMatchers(HttpMethod.GET, "/api/posts/{id}").authenticated()
 
                         .requestMatchers(HttpMethod.POST, "/api/posts").authenticated()

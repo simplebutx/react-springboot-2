@@ -35,7 +35,7 @@ public class PostService {
     public void createPost(PostCreateRequest dto, String email) {
         User author = userRepository.findByEmail(email)
                 .orElseThrow(()-> new IllegalArgumentException("유저 없음"));
-        Post post = new Post(dto.getTitle(), dto.getContent(), author);
+        Post post = new Post(dto.getTitle(), dto.getContent(), dto.getImageKey(), author);
         postRepository.save(post);
     }
 
@@ -47,7 +47,7 @@ public class PostService {
         boolean isAuthor = post.getAuthor().getId().equals(loginUserId);
         boolean isAdmin = role == Role.ADMIN;
 
-        return new PostDetailResponse(post.getTitle(), post.getContent(),
+        return new PostDetailResponse(post.getTitle(), post.getContent(), post.getImageKey(),
                 post.getAuthor().getName(), post.getAuthor().getId(), post.getCreatedAt(),
                 isAuthor, isAuthor || isAdmin);
     }
@@ -61,7 +61,7 @@ public class PostService {
             throw new IllegalArgumentException("작성자만 수정할 수 있습니다");
         }
 
-        post.updatePost(dto.getTitle(), dto.getContent());
+        post.updatePost(dto.getTitle(), dto.getContent(), dto.getImageKey());
     }
 
     @Transactional
@@ -74,6 +74,6 @@ public class PostService {
         if (!isAuthor && !isAdmin) {
             throw new AccessDeniedException("작성자 또는 관리자만 삭제할 수 있습니다");
         }
-        postRepository.deleteById(postId);
+        postRepository.delete(post);
     }
 }

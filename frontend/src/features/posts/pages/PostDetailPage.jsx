@@ -12,6 +12,7 @@ export default function PostDetailPage() {
   const { id } = useParams();
   const nav = useNavigate();
   const ui = useUI();
+  const S3_BASE_URL = "https://nth827.s3.ap-northeast-2.amazonaws.com";
 
   const [post, setPost] = useState(null);
 
@@ -88,6 +89,18 @@ const formatDate = (value) => {
         </span>
       </div>
     </div>
+    {post.imageKey && (
+  <div className="post-image">
+    <img
+      src={`${S3_BASE_URL}/${post.imageKey}`}
+      alt="post"
+      loading="lazy"
+      onError={(e) => {
+        e.currentTarget.style.display = "none";
+      }}
+    />
+  </div>
+)}
 
     <div className="post-content">{post.content}</div>
 

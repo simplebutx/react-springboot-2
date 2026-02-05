@@ -10,9 +10,11 @@ import java.time.LocalDateTime;
 public class PostDetailResponse {
     private String title;
     private String content;
+    private String imageKey;
     private String authorName;
     private Long authorId;
     private LocalDateTime createdAt;
+
 
     private boolean canEdit;
     private boolean canDelete;
