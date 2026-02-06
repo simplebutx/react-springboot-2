@@ -6,6 +6,7 @@ on:
       - main
     paths:
       - "frontend/**"
+      - ".github/workflows/deploy-frontend-s3.yml"
 
 jobs:
   deploy:
@@ -19,6 +20,12 @@ jobs:
         uses: actions/setup-node@v4
         with:
           node-version: 18
+
+      - name: Create .env for Vite
+        working-directory: frontend
+        run: |
+          echo "VITE_BACKEND_URL=${{ secrets.VITE_BACKEND_URL }}" > .env
+          cat .env
 
       - name: Install & Build
         working-directory: frontend
