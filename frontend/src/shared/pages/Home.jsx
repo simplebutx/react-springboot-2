@@ -98,7 +98,7 @@ export default function Home() {
               <li>로그인 (Spring Security 인증)</li>
               <li>소셜 로그인 (OAuth)</li>
               <li>로그아웃 (세션 무효화)</li>
-              <li>/api/auth/me 로그인 상태 조회</li>
+              <li>/api/auth/me 로그인 상태 조회 </li>
             </ul>
           </div>
 
