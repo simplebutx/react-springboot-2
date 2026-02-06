@@ -20,6 +20,12 @@ jobs:
         with:
           node-version: 18
 
+      - name: Create .env for Vite
+        working-directory: frontend
+        run: |
+          echo "VITE_BACKEND_URL=${{ secrets.VITE_BACKEND_URL }}" > .env
+          cat .env
+
       - name: Install & Build
         working-directory: frontend
         run: |
