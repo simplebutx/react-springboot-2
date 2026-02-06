@@ -136,6 +136,25 @@ MySQL (RDS)
 
 ---
 
+### ✅ Pagination (페이지네이션)
+
+- 게시글 목록 페이지네이션 처리
+- Spring Data JPA Pageable 사용
+- 페이지 번호 / 페이지 크기 파라미터 지원
+- 공통 PageResponse DTO 사용
+- 프론트엔드에서 페이지 이동 UI 제공
+
+---
+
+### ✅ Post Search (게시글 검색)
+
+- 제목 / 내용 기반 키워드 검색
+- 검색어 + 페이지네이션 동시 지원
+- JPA Custom Query 사용
+- 검색 조건이 없으면 전체 목록 조회
+
+---
+
 ### ✅ API Documentation
 
 - Swagger(OpenAPI) 연동
@@ -200,6 +219,18 @@ com.example.project
 
 ---
 
+## 🔑 OAuth2 Social Login (Google)
+
+- Google OAuth2 로그인 기능 구현
+- Spring Security OAuth2 Client 사용
+- OAuth 인증 성공 시:
+- CustomOAuth2UserService에서 사용자 정보 가공
+- 기존 회원이면 로그인 처리
+- 신규 회원이면 자동 회원가입 처리
+- 인증 완료 후 프론트엔드로 리다이렉트
+
+---
+
 ## 📈 Why This Project?
 
 - 로그인부터 관리자 기능까지 웹 서비스 전체 흐름 경험
@@ -211,7 +242,5 @@ com.example.project
 
 ## 🔮 Future Improvements
 
-- 댓글 기능
 - 게시글 검색
 - 페이지네이션
-- 이미지 업로드 (AWS S3)
