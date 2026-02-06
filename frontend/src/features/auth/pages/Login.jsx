@@ -9,8 +9,13 @@ export default function Login() {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const ui = useUI();
-  const GOOGLE_LOGIN_URL =
-  import.meta.env.VITE_BACKEND_URL + "/oauth2/authorization/google";
+const backendUrl = import.meta.env.VITE_BACKEND_URL;
+
+if (!backendUrl) {
+  console.error("VITE_BACKEND_URL is not set");
+}
+
+const GOOGLE_LOGIN_URL = `${backendUrl}/oauth2/authorization/google`;
 
   const onSubmit = async (e) => {
     e.preventDefault();
