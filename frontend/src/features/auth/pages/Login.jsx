@@ -11,11 +11,9 @@ export default function Login() {
   const ui = useUI();
 const backendUrl = import.meta.env.VITE_BACKEND_URL;
 
-if (!backendUrl) {
-  console.error("VITE_BACKEND_URL is not set");
-}
-
-const GOOGLE_LOGIN_URL = `${backendUrl}/oauth2/authorization/google`;
+const GOOGLE_LOGIN_URL = backendUrl
+  ? `${backendUrl.replace(/\/$/, "")}/oauth2/authorization/google`
+  : null;
 
   const onSubmit = async (e) => {
     e.preventDefault();
@@ -67,9 +65,23 @@ const GOOGLE_LOGIN_URL = `${backendUrl}/oauth2/authorization/google`;
 
 </form>
 
-<a href={GOOGLE_LOGIN_URL} className="login-form button ">
-  <button>Google로 로그인</button>
-</a>
+<button
+  type="button"
+  className="login-form google-btn"
+  onClick={() => {
+    const backendUrl = import.meta.env.VITE_BACKEND_URL;
+    if (!backendUrl) {
+      console.error("VITE_BACKEND_URL is not set");
+      ui.toast("백엔드 주소가 설정되지 않았습니다.");
+      return;
+    }
+    const url = `${backendUrl.replace(/\/$/, "")}/oauth2/authorization/google`;
+    window.location.href = url;
+  }}
+>
+  Google로 로그인
+</button>
+
 
 </>
   );
