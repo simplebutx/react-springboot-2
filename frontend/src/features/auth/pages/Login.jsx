@@ -41,15 +41,25 @@ export default function Login() {
       }
   };
 
-   const onGoogleLogin = () => {
-    // ✅ 배포 디버깅: env가 비었는지 바로 알 수 있게
-    if (!googleLoginUrl) {
-      console.error("VITE_BACKEND_URL is missing:", backendUrl);
-      ui.toast("백엔드 주소가 설정되지 않았습니다. (VITE_BACKEND_URL)");
+ const handleGoogleLogin = () => {
+  try {
+    const backendUrl = import.meta.env.VITE_BACKEND_URL;
+    console.log("VITE_BACKEND_URL =", backendUrl);
+
+    if (!backendUrl) {
+      ui.toast("VITE_BACKEND_URL이 비어있습니다.");
       return;
     }
-    window.location.assign(googleLoginUrl);
-  };
+
+    const url = `${backendUrl.replace(/\/$/, "")}/oauth2/authorization/google`;
+    console.log("redirect url =", url);
+
+    window.location.assign(url);
+  } catch (e) {
+    console.error("google login click error:", e);
+    ui.toast("구글 로그인 클릭 중 오류(콘솔 확인)");
+  }
+};
 
   return (
     <>
@@ -71,9 +81,9 @@ export default function Login() {
   />
 
   <button type="submit">로그인</button>
-   <button type="button" className="google-login-btn" onClick={onGoogleLogin}>
-          Google로 로그인
-        </button>
+<button type="button" onClick={handleGoogleLogin}>
+  Google로 로그인
+</button>
 
 </form>
 
