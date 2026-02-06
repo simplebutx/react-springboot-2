@@ -1,4 +1,4 @@
-package com.htm.react_springboot_2.post.dto;
+package com.htm.react_springboot_2.global.dto;
 
 import lombok.AllArgsConstructor;
 import lombok.Getter;

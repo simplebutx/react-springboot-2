@@ -9,7 +9,24 @@ spring:
       ddl-auto: update
     show-sql: true
 
+  config:
+    import: optional:classpath:application-secret.properties
+
+  security:
+    oauth2:
+      client:
+        registration:
+          google:
+            client-id: ${GOOGLE_CLIENT_ID}
+            client-secret: ${GOOGLE_CLIENT_SECRET}
+            scope:
+              - email
+              - profile
+
 aws:
   region: ap-northeast-2
   s3:
     bucket: nth827
+
+app:
+  frontend-url: ${FRONTEND_URL:http://localhost:5173}

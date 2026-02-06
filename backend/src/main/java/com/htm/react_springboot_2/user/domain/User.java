@@ -1,6 +1,5 @@
 package com.htm.react_springboot_2.user.domain;
 
-import com.fasterxml.jackson.annotation.JsonAnyGetter;
 import com.htm.react_springboot_2.auth.domain.Role;
 import jakarta.persistence.*;
 import lombok.AccessLevel;

@@ -1,6 +1,7 @@
 package com.htm.react_springboot_2.post.service;
 
 import com.htm.react_springboot_2.auth.domain.Role;
+import com.htm.react_springboot_2.global.dto.PageResponse;
 import com.htm.react_springboot_2.post.domain.Post;
 import com.htm.react_springboot_2.post.dto.*;
 import com.htm.react_springboot_2.post.repository.PostRepository;
@@ -13,8 +14,6 @@ import org.springframework.data.domain.Sort;
 import org.springframework.security.access.AccessDeniedException;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
-
-import java.util.List;
 
 @Service
 @RequiredArgsConstructor

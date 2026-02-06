@@ -4,18 +4,27 @@ import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import com.htm.react_springboot_2.user.domain.User;
 import org.springframework.security.core.userdetails.UserDetails;
+import org.springframework.security.oauth2.core.user.OAuth2User;
 
 import java.util.Collection;
 import java.util.List;
+import java.util.Map;
 
 // User 엔티티를 CustomUserDetails 형태로 감싼다
 // CustomUserDetails는 세션에 들어가는 데이터중 하나
 
-public class CustomUserDetails implements UserDetails {
+public class CustomUserDetails implements UserDetails, OAuth2User {
     private final User user;
 
+    private final Map<String, Object> attributes;
+
     public CustomUserDetails(User user) {
+        this(user, null);
+    }
+
+    public CustomUserDetails(User user, Map<String, Object> attributes) {
         this.user = user;
+        this.attributes = attributes;
     }
 
     @Override
@@ -33,7 +42,7 @@ public class CustomUserDetails implements UserDetails {
         return user.getEmail();
     }
 
-    public String getName() {
+    public String getDisplayName() {
         return user.getName();
     }
 
@@ -44,6 +53,18 @@ public class CustomUserDetails implements UserDetails {
     public Long getId() {
         return user.getId();
     }
+
+    @Override
+    public Map<String, Object> getAttributes() {
+        return attributes;
+    }
+
+    @Override
+    public String getName() {
+        return user.getEmail();
+    }
+
+
 
 
     @Override public boolean isAccountNonExpired() { return true; }

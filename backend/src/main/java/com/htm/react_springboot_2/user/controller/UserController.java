@@ -22,7 +22,7 @@ public class UserController {
 
     @GetMapping("/api/auth/me")
     public UserMyPageResponse myPage(@AuthenticationPrincipal CustomUserDetails userDetails) {
-        return new UserMyPageResponse(userDetails.getId(), userDetails.getUsername(), userDetails.getName(), userDetails.getRole());
+        return new UserMyPageResponse(userDetails.getId(), userDetails.getUsername(), userDetails.getDisplayName(), userDetails.getRole());
         // CustomUserDetails -> DTO 변환
     }
 

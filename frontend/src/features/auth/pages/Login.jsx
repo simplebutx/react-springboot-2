@@ -9,6 +9,8 @@ export default function Login() {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const ui = useUI();
+  const GOOGLE_LOGIN_URL =
+  import.meta.env.VITE_BACKEND_URL + "/oauth2/authorization/google";
 
   const onSubmit = async (e) => {
     e.preventDefault();
@@ -37,6 +39,8 @@ export default function Login() {
   };
 
   return (
+    <>
+    
     <form className="login-form" onSubmit={onSubmit}>
   <h2>Login</h2>
 
@@ -54,7 +58,14 @@ export default function Login() {
   />
 
   <button type="submit">로그인</button>
+  
+
 </form>
 
+<a href={GOOGLE_LOGIN_URL} className="login-form button ">
+  <button>Google로 로그인</button>
+</a>
+
+</>
   );
 }

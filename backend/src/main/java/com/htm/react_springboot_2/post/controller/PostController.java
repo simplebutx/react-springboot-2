@@ -2,6 +2,7 @@ package com.htm.react_springboot_2.post.controller;
 
 import com.htm.react_springboot_2.auth.domain.CustomUserDetails;
 import com.htm.react_springboot_2.auth.domain.Role;
+import com.htm.react_springboot_2.global.dto.PageResponse;
 import com.htm.react_springboot_2.post.dto.*;
 import com.htm.react_springboot_2.post.service.PostService;
 import jakarta.validation.Valid;
@@ -16,7 +17,7 @@ import org.springframework.web.bind.annotation.*;
 public class PostController {
     private final PostService postService;
 
-    @GetMapping("/api/posts")    // page, size, keyword를 받아서 페이지네이션된 글 목록 조회
+    @GetMapping("/api/posts")    // page, size, 검색 keyword를 받아서 페이지네이션된 글 목록 조회
     public PageResponse<PostListResponse> getPostList(
             @RequestParam(defaultValue = "0") int page,
             @RequestParam(defaultValue = "3") int size,

@@ -20,4 +20,5 @@ public interface PostRepository extends JpaRepository<Post, Long> {
        or p.content like concat('%', :q, '%')
 """)
     Page<Post> searchByTitleOrContent(@Param("q") String q, Pageable pageable);
+    // 제목이나 내용에 검색어가 포함된 게시물을 페이징해서 조회
 }
