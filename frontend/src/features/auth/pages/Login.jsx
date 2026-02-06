@@ -9,11 +9,11 @@ export default function Login() {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const ui = useUI();
-const backendUrl = import.meta.env.VITE_BACKEND_URL;
+  const backendUrl = import.meta.env.VITE_BACKEND_URL;
 
-const GOOGLE_LOGIN_URL = backendUrl
-  ? `${backendUrl.replace(/\/$/, "")}/oauth2/authorization/google`
-  : null;
+   const googleLoginUrl = backendUrl
+    ? `${backendUrl.replace(/\/$/, "")}/oauth2/authorization/google`
+    : null;
 
   const onSubmit = async (e) => {
     e.preventDefault();
@@ -41,6 +41,16 @@ const GOOGLE_LOGIN_URL = backendUrl
       }
   };
 
+   const onGoogleLogin = () => {
+    // ✅ 배포 디버깅: env가 비었는지 바로 알 수 있게
+    if (!googleLoginUrl) {
+      console.error("VITE_BACKEND_URL is missing:", backendUrl);
+      ui.toast("백엔드 주소가 설정되지 않았습니다. (VITE_BACKEND_URL)");
+      return;
+    }
+    window.location.assign(googleLoginUrl);
+  };
+
   return (
     <>
     
@@ -61,21 +71,13 @@ const GOOGLE_LOGIN_URL = backendUrl
   />
 
   <button type="submit">로그인</button>
-  
+   <button type="button" className="google-login-btn" onClick={onGoogleLogin}>
+          Google로 로그인
+        </button>
 
 </form>
 
-<button
-  type="button"
-  className="login-form button"
-  onClick={() => {
-    const backendUrl = import.meta.env.VITE_BACKEND_URL;
-    const url = `${backendUrl.replace(/\/$/, "")}/oauth2/authorization/google`;
-    window.location.assign(url);
-  }}
->
-  Google로 로그인
-</button>
+
 
 
 
