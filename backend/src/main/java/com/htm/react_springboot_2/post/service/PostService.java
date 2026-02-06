@@ -23,7 +23,7 @@ public class PostService {
     private final UserRepository userRepository;
 
     @Transactional(readOnly = true)
-    public PageResponse<PostListResponse> getPosts(int page, int size) {
+    public PageResponse<PostListResponse> getPosts(int page, int size, String keyword) {
 
         // page번째 페이지를 size개 만큼 최신순으로
         PageRequest pageable = PageRequest.of(
@@ -32,7 +32,14 @@ public class PostService {
                 Sort.by(Sort.Direction.DESC, "createdAt")
         );
 
-        Page<PostListResponse> mapped = postRepository.findAll(pageable)  // db에서 가져올때 필요한 페이지만 가져옴
+        boolean hasKeyword = keyword != null && !keyword.trim().isEmpty();    // keyword가 null도 아니고 공백도 아니면 true
+        String q = hasKeyword ? keyword.trim() : null;     // 공백제거
+
+        Page<Post> result = hasKeyword   // 검색한게 있으면 보여주고 없으면 전체 목록 페이징
+                ? postRepository.searchByTitleOrContent(q, pageable)
+                : postRepository.findAll(pageable);
+
+        Page<PostListResponse> mapped = result  // db에서 가져올때 필요한 페이지만 가져옴
                 .map(post -> new PostListResponse(     // Page<Post> -> Page<PostListResponse> 변환
                         post.getId(),
                         post.getTitle(),

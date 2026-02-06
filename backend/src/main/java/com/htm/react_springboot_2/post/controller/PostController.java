@@ -16,12 +16,13 @@ import org.springframework.web.bind.annotation.*;
 public class PostController {
     private final PostService postService;
 
-    @GetMapping("/api/posts")    // page, size를 받아서 페이지네이션된 글 목록 조회
+    @GetMapping("/api/posts")    // page, size, keyword를 받아서 페이지네이션된 글 목록 조회
     public PageResponse<PostListResponse> getPostList(
             @RequestParam(defaultValue = "0") int page,
-            @RequestParam(defaultValue = "3") int size
+            @RequestParam(defaultValue = "3") int size,
+            @RequestParam(required = false) String keyword  // 없으면 null
     ) {
-        return postService.getPosts(page, size);
+        return postService.getPosts(page, size, keyword);
     }
 
     @PostMapping("/api/posts")
