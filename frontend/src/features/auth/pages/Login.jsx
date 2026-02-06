@@ -67,20 +67,16 @@ const GOOGLE_LOGIN_URL = backendUrl
 
 <button
   type="button"
-  className="login-form google-btn"
+  className="login-form button"
   onClick={() => {
     const backendUrl = import.meta.env.VITE_BACKEND_URL;
-    if (!backendUrl) {
-      console.error("VITE_BACKEND_URL is not set");
-      ui.toast("백엔드 주소가 설정되지 않았습니다.");
-      return;
-    }
     const url = `${backendUrl.replace(/\/$/, "")}/oauth2/authorization/google`;
-    window.location.href = url;
+    window.location.assign(url);
   }}
 >
   Google로 로그인
 </button>
+
 
 
 </>
