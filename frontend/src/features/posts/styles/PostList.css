@@ -102,6 +102,53 @@
   filter: brightness(1.05);
 }
 
+
+.pagination {
+  margin-top: 14px;
+  display: flex;
+  gap: 8px;
+  align-items: center;
+  justify-content: center;
+  flex-wrap: wrap;
+}
+
+
+.pagination .btn {
+  padding: 6px 12px;
+  border-radius: 10px;
+  background: rgba(15, 23, 42, 0.55);
+  border: 1px solid rgba(148, 163, 184, 0.2);
+  color: #e5e7eb;
+  font-size: 13px;
+  cursor: pointer;
+  transition: all 0.15s ease;
+}
+
+.pagination .btn:hover:not(:disabled) {
+  background: rgba(30, 41, 59, 0.9);
+}
+
+
+.pagination .btn.page.active {
+  background: #ffffff;
+  color: #0f172a;
+  font-weight: 700;
+}
+
+
+.pagination .btn:disabled {
+  opacity: 0.4;
+  cursor: not-allowed;
+}
+
+
+.page-info {
+  margin-left: 6px;
+  font-size: 13px;
+  color: rgba(226, 232, 240, 0.8);
+}
+
+
 @media (max-width: 560px) {
   .postlist-row {
     grid-template-columns: 1fr 90px;

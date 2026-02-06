@@ -114,7 +114,7 @@ export default function Home() {
           <div className="panel-item">
             <h3>Features</h3>
             <ul>
-              <li>게시판 CRUD (작성자만 수정/삭제 권한, 관리자 전체 삭제 권한)</li>
+              <li>게시판 CRUD (작성자만 수정/삭제 권한, 관리자 전체 삭제 권한, 페이지네이션)</li>
               <li>마이페이지 (가입자 정보, 작성 글 목록 조회, 회원탈퇴)</li>
               <li>관리자 페이지 (회원정보, 권한변경, 회원삭제)</li>
               <li>권한별 메뉴 노출 (네비 상태 반영)</li>

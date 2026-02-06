@@ -2,14 +2,14 @@ package com.htm.react_springboot_2.post.service;
 
 import com.htm.react_springboot_2.auth.domain.Role;
 import com.htm.react_springboot_2.post.domain.Post;
-import com.htm.react_springboot_2.post.dto.PostCreateRequest;
-import com.htm.react_springboot_2.post.dto.PostDetailResponse;
-import com.htm.react_springboot_2.post.dto.PostListResponse;
-import com.htm.react_springboot_2.post.dto.PostUpdateRequest;
+import com.htm.react_springboot_2.post.dto.*;
 import com.htm.react_springboot_2.post.repository.PostRepository;
 import com.htm.react_springboot_2.user.domain.User;
 import com.htm.react_springboot_2.user.repository.UserRepository;
 import lombok.RequiredArgsConstructor;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Sort;
 import org.springframework.security.access.AccessDeniedException;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -23,12 +23,24 @@ public class PostService {
     private final UserRepository userRepository;
 
     @Transactional(readOnly = true)
-    public List<PostListResponse> getPosts() {
-        return postRepository.findAll()
-                .stream()
-                .map(post -> new PostListResponse
-                        (post.getId(), post.getTitle(), post.getAuthor().getName(), post.getCreatedAt()))
-                .toList();
+    public PageResponse<PostListResponse> getPosts(int page, int size) {
+
+        // page번째 페이지를 size개 만큼 최신순으로
+        PageRequest pageable = PageRequest.of(
+                page,
+                size,
+                Sort.by(Sort.Direction.DESC, "createdAt")
+        );
+
+        Page<PostListResponse> mapped = postRepository.findAll(pageable)  // db에서 가져올때 필요한 페이지만 가져옴
+                .map(post -> new PostListResponse(     // Page<Post> -> Page<PostListResponse> 변환
+                        post.getId(),
+                        post.getTitle(),
+                        post.getAuthor().getName(),
+                        post.getCreatedAt()
+                ));
+
+        return PageResponse.of(mapped);   // Page<PostListResponse> -> PageResponse<PostListResponse> 변환
     }
 
     @Transactional

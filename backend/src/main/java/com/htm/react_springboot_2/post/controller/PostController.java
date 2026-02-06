@@ -2,10 +2,7 @@ package com.htm.react_springboot_2.post.controller;
 
 import com.htm.react_springboot_2.auth.domain.CustomUserDetails;
 import com.htm.react_springboot_2.auth.domain.Role;
-import com.htm.react_springboot_2.post.dto.PostCreateRequest;
-import com.htm.react_springboot_2.post.dto.PostDetailResponse;
-import com.htm.react_springboot_2.post.dto.PostListResponse;
-import com.htm.react_springboot_2.post.dto.PostUpdateRequest;
+import com.htm.react_springboot_2.post.dto.*;
 import com.htm.react_springboot_2.post.service.PostService;
 import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
@@ -13,16 +10,18 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.web.bind.annotation.*;
 
-import java.util.List;
 
 @RestController
 @RequiredArgsConstructor
 public class PostController {
     private final PostService postService;
 
-    @GetMapping("/api/posts")
-    public List<PostListResponse> getPostList() {
-        return postService.getPosts();
+    @GetMapping("/api/posts")    // page, size를 받아서 페이지네이션된 글 목록 조회
+    public PageResponse<PostListResponse> getPostList(
+            @RequestParam(defaultValue = "0") int page,
+            @RequestParam(defaultValue = "3") int size
+    ) {
+        return postService.getPosts(page, size);
     }
 
     @PostMapping("/api/posts")
@@ -47,7 +46,7 @@ public class PostController {
     }
 
 
-    @DeleteMapping("api/post/{id}")
+    @DeleteMapping("/api/post/{id}")
     public ResponseEntity<Void> deletePost(@PathVariable Long id, @AuthenticationPrincipal CustomUserDetails userDetails) {
         boolean isAdmin = userDetails.getRole() == Role.ADMIN;
         postService.deletePost(id, userDetails.getId(), isAdmin);
