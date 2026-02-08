@@ -53,11 +53,11 @@ useEffect(() => {
   if (!user) return null;
 
 const handleWithdraw = async () => {
-  if (!confirm("정말 회원을 탈퇴하시겠습니까? 작성한 글은 모두 삭제됩니다.")) return;
+  if (!confirm("정말 회원을 탈퇴하시겠습니까? 작성한 글과 댓글은 모두 삭제됩니다.")) return;
 
   try {
     await api.delete('/users/me');
-    ui.toast("삭제 완료");
+    ui.toast("탈퇴 완료");
     await api.post("/logout");
     nav("/");
   } catch (err) {

@@ -1,9 +1,9 @@
 package com.htm.react_springboot_2.user.service;
 
 
+import com.htm.react_springboot_2.comment.repository.CommentRepository;
 import com.htm.react_springboot_2.post.dto.PostListResponse;
 import com.htm.react_springboot_2.post.repository.PostRepository;
-import com.htm.react_springboot_2.user.domain.User;
 import com.htm.react_springboot_2.user.repository.UserRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
@@ -17,6 +17,7 @@ public class UserService {
 
     private final UserRepository userRepository;
     private final PostRepository postRepository;
+    private final CommentRepository commentRepository;
 
     @Transactional
     public void withdraw(Long userId) {
@@ -24,14 +25,15 @@ public class UserService {
             throw new IllegalArgumentException("유저 없음");
         }
         postRepository.deleteByAuthorId(userId);  // 자식(post)가 남아있으면 부모(user)를 삭제 못함
+        commentRepository.deleteByAuthorId(userId);
         userRepository.deleteById(userId);
     }
 
+    @Transactional(readOnly = true)
     public List<PostListResponse> getMyPosts(Long userId) {
         return postRepository.findByAuthorId(userId)
                 .stream()
                 .map(post -> new PostListResponse(post.getId(), post.getTitle(), post.getAuthor().getName(), post.getCreatedAt()))
                 .toList();
-
     }
 }
