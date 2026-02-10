@@ -9,6 +9,7 @@ import software.amazon.awssdk.services.s3.presigner.model.PresignedPutObjectRequ
 import software.amazon.awssdk.services.s3.presigner.model.PutObjectPresignRequest;
 
 import java.time.Duration;
+import java.util.Set;
 import java.util.UUID;
 
 @Service
@@ -20,30 +21,52 @@ public class PresignService {
     @Value("${aws.s3.bucket}")
     private String bucket;
 
+    // 허용할 content-type만 화이트리스트로 제한
+    private static final Set<String> ALLOWED_CONTENT_TYPES = Set.of(
+            "image/jpeg",
+            "image/png",
+            "image/webp",
+            "image/gif"
+    );
+
     public PresignResponse createPresignedUrl(String contentType) {
+        //  content-type 검증
+        if (contentType == null || contentType.isBlank()) {
+            throw new IllegalArgumentException("contentType이 필요합니다.");
+        }
+        if (!ALLOWED_CONTENT_TYPES.contains(contentType)) {
+            throw new IllegalArgumentException("이미지 파일만 업로드할 수 있습니다. (jpg/png/webp)");
+        }
 
-        String ext = contentType.equals("image/png") ? ".png" : ".jpg";   // 파일 확장자 설정
-        String filename = UUID.randomUUID() + ext;   // 파일명 설정  // UUID: 중복 방지
+        // 확장자 안전 매핑 (클라 입력에 의존하지 않음)
+        String ext = switch (contentType) {
+            case "image/png" -> ".png";
+            case "image/webp" -> ".webp";
+            default -> ".jpg"; // image/jpeg
+        };
 
-        String key = "react-springboot-2/images/posts/" + filename;   // key
+        String filename = UUID.randomUUID() + ext;
 
-        PutObjectRequest objectRequest =     // 이파일을 이버킷에 이key로 이타입으로 올릴거다
+        //  key 규칙 고정 (최소한 prefix를 서버가 강제)
+        String key = "react-springboot-2/images/posts/" + filename;
+
+        PutObjectRequest objectRequest =
                 PutObjectRequest.builder()
                         .bucket(bucket)
                         .key(key)
                         .contentType(contentType)
                         .build();
 
-        PutObjectPresignRequest presignRequest =      // Presigned URL 생성
+        PutObjectPresignRequest presignRequest =
                 PutObjectPresignRequest.builder()
-                        .signatureDuration(Duration.ofMinutes(5))    // 5분동안 유요한 업로드 URL
+                        .signatureDuration(Duration.ofMinutes(5))
                         .putObjectRequest(objectRequest)
                         .build();
 
         PresignedPutObjectRequest presigned =
                 presigner.presignPutObject(presignRequest);
 
-        return new PresignResponse(presigned.url().toString(), key);   // S3에 PUT가능한 임시 URL + DB에 저장할 Key
+        return new PresignResponse(presigned.url().toString(), key);
     }
 
     public record PresignResponse(String url, String key) {}

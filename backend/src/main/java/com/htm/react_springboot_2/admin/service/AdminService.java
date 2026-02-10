@@ -41,7 +41,7 @@ public class AdminService {
         User user = userRepository.findById(id).
                 orElseThrow(()-> new UserNotFoundException());
         if(id.equals(loginUserId)) {
-            throw new NoPermissionException("자기 자신은 수정할 수 없습니다");
+            throw new NoPermissionException("자기 자신의 권한은 변경할 수 없습니다");
         }
         user.updateRole(dto.getRole());
     }
