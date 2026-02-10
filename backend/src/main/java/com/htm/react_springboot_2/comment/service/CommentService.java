@@ -33,7 +33,6 @@ public class CommentService {
         List<Comment> comments = commentRepository.findByPostId(postId);
         return comments.stream()
                 .map(comment -> {
-
                     boolean isAuthor = userId != null && comment.getAuthor().getId().equals(userId);
                     boolean isAdmin = role == Role.ADMIN;
 

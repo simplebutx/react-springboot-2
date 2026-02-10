@@ -2,16 +2,19 @@ package com.htm.react_springboot_2.admin.service;
 
 import com.htm.react_springboot_2.admin.dto.AdminChangeUserRoleRequest;
 import com.htm.react_springboot_2.admin.dto.AdminUserListResponse;
+import com.htm.react_springboot_2.global.dto.PageResponse;
 import com.htm.react_springboot_2.global.exception.NoPermissionException;
 import com.htm.react_springboot_2.global.exception.UserNotFoundException;
 import com.htm.react_springboot_2.user.domain.User;
 import com.htm.react_springboot_2.user.repository.UserRepository;
 
 import lombok.RequiredArgsConstructor;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
-import java.util.List;
 
 @Service
 @RequiredArgsConstructor
@@ -19,11 +22,27 @@ public class AdminService {
     private final UserRepository userRepository;
 
     @Transactional(readOnly = true)
-    public List<AdminUserListResponse> getUserList() {
-        return userRepository.findAll()
-                .stream()
-                .map(user -> new AdminUserListResponse(user.getId(), user.getEmail(), user.getName(), user.getRole()))   // entity -> dto
-                .toList();
+    public PageResponse<AdminUserListResponse> getUserList(int page, int size, String keyword) {
+
+        PageRequest pageable = PageRequest.of(page, size,
+                Sort.by(Sort.Direction.ASC, "role"));
+
+        boolean hasKeyword = keyword != null && !keyword.trim().isEmpty();
+        String q = hasKeyword ? keyword.trim() : null;
+
+        Page<User> result = hasKeyword
+                ? userRepository.searchByEmailorName(q, pageable)
+                : userRepository.findAll(pageable);
+
+        Page<AdminUserListResponse> mapped = result
+                .map(user -> new AdminUserListResponse(
+                        user.getId(),
+                        user.getEmail(),
+                        user.getName(),
+                        user.getRole()
+                ));
+
+        return PageResponse.of(mapped);
     }
 
     @Transactional
