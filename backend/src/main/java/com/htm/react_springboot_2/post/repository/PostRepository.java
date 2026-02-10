@@ -21,4 +21,8 @@ public interface PostRepository extends JpaRepository<Post, Long> {
 """)
     Page<Post> searchByTitleOrContent(@Param("q") String q, Pageable pageable);
     // 제목이나 내용에 검색어가 포함된 게시물을 페이징해서 조회
+    // @Param: 쿼리 문자열의 변수 이름과 메서드 인자를 매핑
+
+    // JPA로 쓰면
+    // Page<Post> findByTitleContainingOrContentContaining(String title, String content, Pageable pageable);
 }

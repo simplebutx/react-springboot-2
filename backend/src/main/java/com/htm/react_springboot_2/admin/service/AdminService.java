@@ -2,6 +2,8 @@ package com.htm.react_springboot_2.admin.service;
 
 import com.htm.react_springboot_2.admin.dto.AdminChangeUserRoleRequest;
 import com.htm.react_springboot_2.admin.dto.AdminUserListResponse;
+import com.htm.react_springboot_2.global.exception.NoPermissionException;
+import com.htm.react_springboot_2.global.exception.UserNotFoundException;
 import com.htm.react_springboot_2.user.domain.User;
 import com.htm.react_springboot_2.user.repository.UserRepository;
 
@@ -27,9 +29,9 @@ public class AdminService {
     @Transactional
     public void deleteUser(Long id, Long loginUserId) {
         User user = userRepository.findById(id).
-                orElseThrow(()-> new IllegalArgumentException("유저 없음"));
+                orElseThrow(()-> new UserNotFoundException());
         if(id.equals(loginUserId)) {
-            throw new IllegalArgumentException("자기 자신은 삭제할 수 없습니다");
+            throw new NoPermissionException("자기 자신은 삭제할 수 없습니다");
         }
         userRepository.delete(user);
     }
@@ -37,9 +39,9 @@ public class AdminService {
     @Transactional
     public void changeUserRole(AdminChangeUserRoleRequest dto, Long id, Long loginUserId) {
         User user = userRepository.findById(id).
-                orElseThrow(()-> new IllegalArgumentException("유저 없음"));
+                orElseThrow(()-> new UserNotFoundException());
         if(id.equals(loginUserId)) {
-            throw new IllegalArgumentException("자기 자신은 수정할 수 없습니다");
+            throw new NoPermissionException("자기 자신은 수정할 수 없습니다");
         }
         user.updateRole(dto.getRole());
     }

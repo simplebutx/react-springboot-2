@@ -9,15 +9,15 @@ import org.springframework.web.bind.annotation.RestController;
 
 @RestController
 @RequiredArgsConstructor
+
+//  업로드하기 위한 Presigned URL을 발급하는 API
 @RequestMapping("/api/images")
 public class PresignController {
 
     private final PresignService presignService;
 
     @GetMapping("/presign")
-    public PresignService.PresignResponse presign(
-            @RequestParam String contentType
-    ) {
+    public PresignService.PresignResponse presign(@RequestParam String contentType) {
         return presignService.createPresignedUrl(contentType);
     }
 }

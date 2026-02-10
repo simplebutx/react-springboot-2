@@ -2,12 +2,15 @@ package com.htm.react_springboot_2.global.dto;
 
 import lombok.AllArgsConstructor;
 import lombok.Getter;
+import lombok.ToString;
 import org.springframework.data.domain.Page;
 
 import java.util.List;
 
 @Getter
 @AllArgsConstructor
+@ToString
+
 // 데이터 목록 + 페이지 정보 묶어서 프론트로 보내는 박스
 public class PageResponse<T> {    // 여기서 제네릭 쓰는 이유는 재사용하려고
     private List<T> items;   // 여기에 PostListResponse DTO (글 정보)가 들어감. 나머지 필드는 페이지 정보들

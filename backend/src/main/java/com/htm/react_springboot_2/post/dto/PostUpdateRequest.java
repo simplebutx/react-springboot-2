@@ -6,10 +6,10 @@ import lombok.Getter;
 @Getter
 public class PostUpdateRequest {
     @NotBlank(message = "제목을 입력해주세요.")
-    public String title;
+    private String title;
 
     @NotBlank(message = "내용을 입력해주세요.")
-    public String content;
+    private String content;
 
     private String imageKey;
 }

@@ -54,7 +54,7 @@ export default function Login() {
     const url = `${backendUrl.replace(/\/$/, "")}/oauth2/authorization/google`;
     console.log("redirect url =", url);
 
-    window.location.assign(url);
+    window.location.assign(url);    // 리다이렉트 (구글 로그인 및 동의 화면)
   } catch (e) {
     console.error("google login click error:", e);
     ui.toast("구글 로그인 클릭 중 오류(콘솔 확인)");

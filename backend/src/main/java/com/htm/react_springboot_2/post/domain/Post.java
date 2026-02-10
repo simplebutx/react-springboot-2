@@ -35,7 +35,7 @@ public class Post {
     // FetchType.LAZY: User가 필요할때만 User를 조회
 
     @Column(name = "image_key")
-    private String imageKey;
+    private String imageKey;  // S3 객체의 키(식별자) 저장
 
     @OneToMany(mappedBy = "post", cascade = CascadeType.REMOVE, orphanRemoval = true)   // Post 삭제시 자식인 Comment도 자동삭제
     private List<Comment> comments = new ArrayList<>();
@@ -46,7 +46,6 @@ public class Post {
         this.imageKey = imageKey;
         this.author = author;
         this.createdAt = LocalDateTime.now();
-
     }
 
     public void updatePost(String title, String content, String imageKey) {

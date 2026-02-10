@@ -6,12 +6,15 @@ import com.htm.react_springboot_2.comment.dto.CommentCreateRequest;
 import com.htm.react_springboot_2.comment.dto.CommentListResponse;
 import com.htm.react_springboot_2.comment.dto.CommentUpdateRequest;
 import com.htm.react_springboot_2.comment.repository.CommentRepository;
+import com.htm.react_springboot_2.global.exception.CommentNotFoundException;
+import com.htm.react_springboot_2.global.exception.NoPermissionException;
+import com.htm.react_springboot_2.global.exception.PostNotFoundException;
+import com.htm.react_springboot_2.global.exception.UserNotFoundException;
 import com.htm.react_springboot_2.post.domain.Post;
 import com.htm.react_springboot_2.post.repository.PostRepository;
 import com.htm.react_springboot_2.user.domain.User;
 import com.htm.react_springboot_2.user.repository.UserRepository;
 import lombok.RequiredArgsConstructor;
-import org.springframework.security.access.AccessDeniedException;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -49,9 +52,9 @@ public class CommentService {
     @Transactional
     public void postComment(CommentCreateRequest dto, Long userId, Long postId) {
         User author = userRepository.findById(userId)
-                .orElseThrow(()-> new IllegalArgumentException("유저 없음"));
+                .orElseThrow(()-> new UserNotFoundException());
         Post post = postRepository.findById(postId)
-                .orElseThrow(()-> new IllegalArgumentException("글 없음"));
+                .orElseThrow(()-> new PostNotFoundException());
 
         Comment comment = new Comment(dto.getContent(), author, post); // dto -> entity
         commentRepository.save(comment);
@@ -60,10 +63,10 @@ public class CommentService {
     @Transactional
     public void updateComment(CommentUpdateRequest dto, Long commentId, Long userId) {
         Comment comment = commentRepository.findById(commentId)
-                .orElseThrow(()-> new IllegalArgumentException("댓글 없음"));
+                .orElseThrow(()-> new CommentNotFoundException());
 
         if(!comment.getAuthor().getId().equals(userId)) {
-            throw new IllegalArgumentException("작성자만 수정할 수 있습니다");
+            throw new NoPermissionException("작성자만 수정할 수 있습니다");
         }
         comment.updateComment(dto.getContent());
     }
@@ -71,12 +74,12 @@ public class CommentService {
     @Transactional
     public void deleteComment(Long commentId, Long userId, boolean isAdmin) {
         Comment comment = commentRepository.findById(commentId)
-                        .orElseThrow(()-> new IllegalArgumentException("댓글 없음"));
+                        .orElseThrow(()-> new CommentNotFoundException());
 
         boolean isAuthor = comment.getAuthor().getId().equals(userId);
 
         if (!isAuthor && !isAdmin) {
-            throw new AccessDeniedException("작성자 또는 관리자만 삭제할 수 있습니다");
+            throw new NoPermissionException("작성자 또는 관리자만 삭제할 수 있습니다");
         }
         commentRepository.delete(comment);
     }

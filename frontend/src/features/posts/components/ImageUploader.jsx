@@ -12,7 +12,7 @@ export default function ImageUploader({ onUploaded }) {
   const ALLOWED = ["image/png", "image/jpeg", "image/webp"];
   const MAX_MB = 5;
 
-  const onPick = async (e) => {
+  const onPick = async (e) => {    // 이미지를 고르는 순간 presign 요청, 응답받음
     const f = e.target.files?.[0];
     if (!f) return;
 
@@ -29,11 +29,11 @@ export default function ImageUploader({ onUploaded }) {
     try {
       setUploading(true);
 
-      const { data } = await api.get("/images/presign", {
+      const { data } = await api.get("/images/presign", {   // presign 요청
         params: { contentType: f.type }
       });
 
-      const res = await fetch(data.url, {
+      const res = await fetch(data.url, {    // S3로 직접 업로드
         method: "PUT",
         headers: { "Content-Type": f.type },
         body: f

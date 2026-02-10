@@ -2,6 +2,7 @@ package com.htm.react_springboot_2.user.service;
 
 
 import com.htm.react_springboot_2.comment.repository.CommentRepository;
+import com.htm.react_springboot_2.global.exception.UserNotFoundException;
 import com.htm.react_springboot_2.post.dto.PostListResponse;
 import com.htm.react_springboot_2.post.repository.PostRepository;
 import com.htm.react_springboot_2.user.repository.UserRepository;
@@ -22,7 +23,7 @@ public class UserService {
     @Transactional
     public void withdraw(Long userId) {
         if(!userRepository.existsById(userId)) {
-            throw new IllegalArgumentException("유저 없음");
+            throw new UserNotFoundException();
         }
         postRepository.deleteByAuthorId(userId);  // 자식(post)가 남아있으면 부모(user)를 삭제 못함
         commentRepository.deleteByAuthorId(userId);

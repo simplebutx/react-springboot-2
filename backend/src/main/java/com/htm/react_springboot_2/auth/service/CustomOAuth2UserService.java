@@ -23,6 +23,7 @@ public class CustomOAuth2UserService extends DefaultOAuth2UserService {
 
         OAuth2User oauthUser = super.loadUser(request);
 
+        // 구글에서 받은 정보에서 email, name 꺼냄
         String email = oauthUser.getAttribute("email");
         String name = oauthUser.getAttribute("name");
 
@@ -30,17 +31,14 @@ public class CustomOAuth2UserService extends DefaultOAuth2UserService {
             throw new OAuth2AuthenticationException("Google account email not found");
         }
 
+        // 회원가입 없으면 자동 회원가입
         User user = userRepository.findByEmail(email)
                 .orElseGet(() ->
                         userRepository.save(
-                                new User(
-                                        email,
-                                        "OAUTH2",
-                                        name != null ? name : "GoogleUser"
-                                )
+                                new User(email, "OAUTH2", name != null ? name : "GoogleUser")
                         )
                 );
 
-        return new CustomUserDetails(user);
+        return new CustomUserDetails(user);   // 사용자 반환
     }
 }

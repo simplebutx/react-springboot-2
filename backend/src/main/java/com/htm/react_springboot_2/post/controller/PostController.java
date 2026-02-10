@@ -23,6 +23,7 @@ public class PostController {
             @RequestParam(defaultValue = "3") int size,
             @RequestParam(required = false) String keyword  // 없으면 null
     ) {
+        System.out.println(postService.getPosts(page, size, keyword));
         return postService.getPosts(page, size, keyword);
     }
 

@@ -82,7 +82,7 @@ export default function PostListPage() {
     });
   };
 
-  const onSearch = () => {
+  const onSearch = () => {  
     const nextKeyword = keywordInput.trim();
     setSearchParams((prev) => {
       const sp = new URLSearchParams(prev);

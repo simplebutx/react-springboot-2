@@ -1,5 +1,6 @@
 package com.htm.react_springboot_2.global.exception;
 
+import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.MethodArgumentNotValidException;
 import org.springframework.web.bind.annotation.ExceptionHandler;
@@ -10,8 +11,8 @@ public class GlobalExceptionHandler {
     @ExceptionHandler(IllegalArgumentException.class)
     public ResponseEntity<ErrorResponse> handleIllegalArgument(IllegalArgumentException e) {
         return ResponseEntity
-                .status(404)
-                .body(new ErrorResponse(404, e.getMessage()));
+                .status(HttpStatus.BAD_REQUEST)
+                .body(new ErrorResponse(400, "요청 값이 올바르지 않습니다."));
     }
 
     // @NotBlank나 @Email 같은 검사 실패의 경우
@@ -27,8 +28,44 @@ public class GlobalExceptionHandler {
                 .orElse("요청 값이 올바르지 않습니다.");
 
         return ResponseEntity
-                .status(400)
+                .status(HttpStatus.BAD_REQUEST)
                 .body(new ErrorResponse(400, msg));
     }
+
+    @ExceptionHandler(PostNotFoundException.class)
+    public ResponseEntity<ErrorResponse> handlePostNotFound(PostNotFoundException e) {
+        return ResponseEntity
+                .status(HttpStatus.NOT_FOUND)
+                .body(new ErrorResponse(404, e.getMessage()));
+    }
+
+    @ExceptionHandler(CommentNotFoundException.class)
+    public ResponseEntity<ErrorResponse> handleCommentNotFound(CommentNotFoundException e) {
+        return ResponseEntity
+                .status(HttpStatus.NOT_FOUND)
+                .body(new ErrorResponse(404, e.getMessage()));
+    }
+
+    @ExceptionHandler(UserNotFoundException.class)
+    public ResponseEntity<ErrorResponse> handleUserNotFound(UserNotFoundException e) {
+        return ResponseEntity
+                .status(HttpStatus.NOT_FOUND)
+                .body(new ErrorResponse(404, e.getMessage()));
+    }
+
+    @ExceptionHandler(NoPermissionException.class)
+    public ResponseEntity<ErrorResponse> handleAccessDenied(NoPermissionException e) {
+        return ResponseEntity
+                .status(HttpStatus.FORBIDDEN)
+                .body(new ErrorResponse(403, e.getMessage()));
+    }
+
+    @ExceptionHandler(DuplicateEmailException.class)
+    public ResponseEntity<ErrorResponse> handleDupicateEmail(DuplicateEmailException e) {
+        return ResponseEntity
+                .status(HttpStatus.CONFLICT)
+                .body(new ErrorResponse(409, e.getMessage()));
+    }
+
 }
 

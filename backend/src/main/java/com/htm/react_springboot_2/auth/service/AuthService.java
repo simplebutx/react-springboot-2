@@ -1,6 +1,7 @@
 package com.htm.react_springboot_2.auth.service;
 
 import com.htm.react_springboot_2.auth.dto.SignupRequest;
+import com.htm.react_springboot_2.global.exception.DuplicateEmailException;
 import com.htm.react_springboot_2.user.domain.User;
 import com.htm.react_springboot_2.user.repository.UserRepository;
 import lombok.RequiredArgsConstructor;
@@ -18,7 +19,7 @@ public class AuthService {
     @Transactional
     public void signup(SignupRequest dto) {
         if(userRepository.existsByEmail(dto.getEmail())) {
-            throw new IllegalArgumentException("이미 가입중인 이메일입니다.");
+            throw new DuplicateEmailException();
         }
 
         String hashedPassword = passwordEncoder.encode(dto.getPassword());
