@@ -17,11 +17,11 @@ import org.springframework.web.bind.annotation.*;
 public class PostController {
     private final PostService postService;
 
-    @GetMapping("/api/posts")    // page, size, 검색 keyword를 받아서 페이지네이션된 글 목록 조회
+    @GetMapping("/api/posts")
     public PageResponse<PostListResponse> getPostList(
             @RequestParam(defaultValue = "0") int page,
             @RequestParam(defaultValue = "10") int size,
-            @RequestParam(required = false) String keyword  // 없으면 null
+            @RequestParam(required = false) String keyword
     ) {
         return postService.getPosts(page, size, keyword);
     }
@@ -56,5 +56,3 @@ public class PostController {
     }
 }
 
-// ResponseEntity 클래스 = “HTTP 응답 전체를 담는 그릇” 클래스
-// HTTP 응답에는 : 상태코드 (200,401), 헤더, 바디(JSON 데이터)가 있다 -> ResponseEntity는 이걸 전부 담음

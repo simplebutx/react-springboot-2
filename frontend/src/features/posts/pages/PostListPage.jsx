@@ -93,15 +93,6 @@ export default function PostListPage() {
     });
   };
 
-  const onClear = () => {
-    setKeywordInput("");
-    setSearchParams((prev) => {
-      const sp = new URLSearchParams(prev);
-      sp.set("page", "0");
-      sp.delete("keyword");
-      return sp;
-    });
-  };
 
   const pageNumbers = useMemo(() => {
     if (!totalPages) return [];

@@ -21,7 +21,6 @@ public class PresignService {
     @Value("${aws.s3.bucket}")
     private String bucket;
 
-    // 허용할 content-type만 화이트리스트로 제한
     private static final Set<String> ALLOWED_CONTENT_TYPES = Set.of(
             "image/jpeg",
             "image/png",

@@ -6,7 +6,7 @@ import lombok.AccessLevel;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 
-@NoArgsConstructor(access = AccessLevel.PROTECTED)  // 기본생성자
+@NoArgsConstructor(access = AccessLevel.PROTECTED)
 @Entity
 @Table(name="users")
 @Getter

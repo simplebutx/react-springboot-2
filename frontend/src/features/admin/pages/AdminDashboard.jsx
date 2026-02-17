@@ -125,7 +125,7 @@ export default function AdminDashboard() {
     if (!ok) return;
 
     try {
-      await api.put(`/admin/users/${id}`, { role });
+      await api.put(`/admin/users/${id}/role`, { role });
       ui.toast("권한 변경 완료");
       fetchUsers();
     } catch (err) {

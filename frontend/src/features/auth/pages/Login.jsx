@@ -9,11 +9,6 @@ export default function Login() {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const ui = useUI();
-  const backendUrl = import.meta.env.VITE_BACKEND_URL;
-
-   const googleLoginUrl = backendUrl
-    ? `${backendUrl.replace(/\/$/, "")}/oauth2/authorization/google`
-    : null;
 
   const onSubmit = async (e) => {
     e.preventDefault();
@@ -44,7 +39,6 @@ export default function Login() {
  const handleGoogleLogin = () => {
   try {
     const backendUrl = import.meta.env.VITE_BACKEND_URL;
-    console.log("VITE_BACKEND_URL =", backendUrl);
 
     if (!backendUrl) {
       ui.toast("VITE_BACKEND_URL이 비어있습니다.");

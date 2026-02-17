@@ -24,7 +24,7 @@ public class AdminController {
                                     @RequestParam(defaultValue = "10") int size,
                                     @RequestParam(required = false) String keyword){
         System.out.println(adminService.getUserList(page, size, keyword));
-        return adminService.getUserList(page, size, keyword);            // dto -> json
+        return adminService.getUserList(page, size, keyword);
     }
 
     @DeleteMapping("/api/admin/users/{id}")
@@ -33,7 +33,7 @@ public class AdminController {
         return ResponseEntity.noContent().build();
     }
 
-    @PutMapping("/api/admin/users/{id}")
+    @PutMapping("/api/admin/users/{id}/role")
     public ResponseEntity<Void> changeUserRole(@RequestBody AdminChangeUserRoleRequest dto, @PathVariable Long id, @AuthenticationPrincipal CustomUserDetails userDetails) {
         adminService.changeUserRole(dto, id, userDetails.getId());
         return ResponseEntity.noContent().build();

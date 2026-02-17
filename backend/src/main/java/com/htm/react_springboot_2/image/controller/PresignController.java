@@ -10,7 +10,7 @@ import org.springframework.web.bind.annotation.RestController;
 @RestController
 @RequiredArgsConstructor
 
-//  업로드하기 위한 Presigned URL을 발급하는 API
+
 @RequestMapping("/api/images")
 public class PresignController {
 

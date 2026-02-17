@@ -34,16 +34,11 @@ public class SecurityConfig {
                 .csrf(csrf -> csrf.disable())
                 .cors(cors -> cors.configurationSource(corsConfigurationSource()))
                 .oauth2Login(oauth -> oauth
-                                // OAuth 시작/콜백 엔드포인트는 Spring Security 기본값 사용:
-                                //  - 시작: /oauth2/authorization/google
-                                //  - 콜백: /login/oauth2/code/google
                                 .userInfoEndpoint(userInfo -> userInfo
                                         .userService(customOAuth2UserService)
 
                                 )
                                 .defaultSuccessUrl(frontendUrl, true)
-                        // 필요하면 성공 후 프론트로 보내기(선택)
-                        // .defaultSuccessUrl("http://localhost:5173", true)
                 )
                 .formLogin(form -> form
                         .loginProcessingUrl("/api/login")

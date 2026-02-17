@@ -10,7 +10,6 @@ import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.stereotype.Service;
 
 
-// DB에 유저 조회 -> CustomUserDetail 형태로 변환
 @Service
 @RequiredArgsConstructor
 public class CustomUserDetailService implements UserDetailsService{
@@ -19,6 +18,7 @@ public class CustomUserDetailService implements UserDetailsService{
     @Override
     public UserDetails loadUserByUsername(String email)
             throws UsernameNotFoundException {
+
 
         User user = userRepository.findByEmail(email)
                 .orElseThrow(() ->
