@@ -48,20 +48,14 @@ USER
 
 ---
 
-## 📌 Architecture
+## ☁️ AWS Architecture
 
-[Client]
-↓
-CloudFront
-↓
-S3 (React)
-↓
-Spring Boot (Elastic Beanstalk)
-↓
-MySQL (RDS)
+![Architecture](./docs/architecture.png)
 
+## ERD
 
----
+![ERD](./docs/erd.png)
+
 
 ## ✨ Core Features
 
