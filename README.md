@@ -155,6 +155,8 @@ MySQL (RDS)
 
 ---
 
+
+
 ### ✅ API Documentation
 
 - Swagger(OpenAPI) 연동
@@ -239,8 +241,3 @@ com.example.project
 - CI/CD 자동화 경험
 
 ---
-
-## 🔮 Future Improvements
-
-- 게시글 검색
-- 페이지네이션
