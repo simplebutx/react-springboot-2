@@ -202,18 +202,17 @@ USER
 
 ## 📂 Project Structure (Backend)
 
+```
 com.example.project
 ├─ auth
 ├─ user
 ├─ admin
 ├─ post
-├─ global
-│ ├─ config
-│ ├─ exception
-│ └─ security
-
-
----
+└─ global
+   ├─ config
+   ├─ exception
+   └─ security
+```
 
 ## 🔑 OAuth2 Social Login (Google)
 
