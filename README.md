@@ -203,15 +203,17 @@ USER
 ## 📂 Project Structure (Backend)
 
 ```
-com.example.project
-├─ auth
-├─ user
+com.htm.react_springboot_2
 ├─ admin
+├─ auth
+├─ comment
+├─ global
+│  ├─ config
+│  ├─ dto
+│  └─ exception
+├─ image
 ├─ post
-└─ global
-   ├─ config
-   ├─ exception
-   └─ security
+└─ user
 ```
 
 ## 🔑 OAuth2 Social Login (Google)
