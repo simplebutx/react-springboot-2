@@ -17,7 +17,7 @@ export default function AdminDashboard() {
     Number.isFinite(pageParam) && pageParam >= 0 ? pageParam : 0;
 
   const keyword = (searchParams.get("keyword") ?? "").trim();
-  const size = 10;
+  const size = 7;
 
   // 입력창용 state (타이핑 중 즉시 검색 방지)
   const [keywordInput, setKeywordInput] = useState(keyword);

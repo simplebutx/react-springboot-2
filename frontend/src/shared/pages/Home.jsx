@@ -16,7 +16,9 @@ export default function Home() {
           React + Spring <span>Portfolio</span>
         </h1>
         <p className="hero-sub">
-          
+          <li>관리자 계정</li>
+          <li>아이디: admin</li>
+          <li>비밀번호: 123</li>
         </p>
       </header>
 
