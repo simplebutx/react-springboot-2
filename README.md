@@ -48,20 +48,14 @@ USER
 
 ---
 
-## 📌 Architecture
+## ☁️ AWS Architecture
 
-[Client]
-↓
-CloudFront
-↓
-S3 (React)
-↓
-Spring Boot (Elastic Beanstalk)
-↓
-MySQL (RDS)
+![Architecture](./docs/architecture.png)
 
+## ERD
 
----
+![ERD](./docs/erd.png)
+
 
 ## ✨ Core Features
 
@@ -208,18 +202,19 @@ MySQL (RDS)
 
 ## 📂 Project Structure (Backend)
 
-com.example.project
-├─ auth
-├─ user
+```
+com.htm.react_springboot_2
 ├─ admin
-├─ post
+├─ auth
+├─ comment
 ├─ global
-│ ├─ config
-│ ├─ exception
-│ └─ security
-
-
----
+│  ├─ config
+│  ├─ dto
+│  └─ exception
+├─ image
+├─ post
+└─ user
+```
 
 ## 🔑 OAuth2 Social Login (Google)
 
