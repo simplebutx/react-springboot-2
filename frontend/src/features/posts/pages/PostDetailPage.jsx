@@ -86,6 +86,13 @@ const formatDate = (value) => {
         <span className="meta-item">
           <span className="meta-label">작성일</span>
           <span className="meta-value">{formatDate(post.createdAt)}</span>
+          {post.updatedAt && (
+            <>
+              <span className="meta-label">수정일</span>
+              <span className="meta-value">{formatDate(post.updatedAt)}</span>
+              </>
+          )}
+          
         </span>
       </div>
     </div>

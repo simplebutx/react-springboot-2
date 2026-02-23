@@ -37,12 +37,8 @@ public class CommentService {
                     boolean isAdmin = role == Role.ADMIN;
 
                     return new CommentListResponse(
-                            comment.getId(),
-                            comment.getContent(),
-                            comment.getAuthor().getName(),
-                            comment.getAuthor().getId(),
-                            comment.getCreatedAt(),
-                            isAuthor, isAuthor || isAdmin
+                            comment.getId(), comment.getContent(), comment.getAuthor().getName(), comment.getAuthor().getId(),
+                            comment.getCreatedAt(), comment.getUpdatedAt(), isAuthor, isAuthor || isAdmin
                     );
                 })
                 .toList();

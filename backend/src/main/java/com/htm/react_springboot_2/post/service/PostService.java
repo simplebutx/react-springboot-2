@@ -43,8 +43,7 @@ public class PostService {
 
         Page<PostListResponse> mapped = result
                 .map(post -> new PostListResponse(
-                        post.getId(),
-                        post.getTitle(),
+                        post.getId(), post.getTitle(),
                         post.getAuthor().getName(),
                         post.getCreatedAt()
                 ));
@@ -69,7 +68,7 @@ public class PostService {
         boolean isAdmin = role == Role.ADMIN;
 
         return new PostDetailResponse(post.getTitle(), post.getContent(), post.getImageKey(),
-                post.getAuthor().getName(), post.getAuthor().getId(), post.getCreatedAt(),
+                post.getAuthor().getName(), post.getAuthor().getId(), post.getCreatedAt(), post.getUpdatedAt(),
                 isAuthor, isAuthor || isAdmin);
     }
 

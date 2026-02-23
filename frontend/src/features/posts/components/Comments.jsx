@@ -106,7 +106,7 @@ const formatDate = (value) => {
     return (
         <>
   <div className="comments-wrap">
-  <div className="comments-title">댓글 {comments.length} </div>
+  <div className="comments-title">댓글 {comments.length}개</div>
 
   <div className="comments-list">
     {comments.map((c) => (
@@ -147,6 +147,9 @@ const formatDate = (value) => {
 
         <div className="comment-date">
           {formatDate(c.createdAt)}
+          {c.updatedAt && (
+            <span> (수정됨)</span>
+          )}
         </div>
 
       </div>

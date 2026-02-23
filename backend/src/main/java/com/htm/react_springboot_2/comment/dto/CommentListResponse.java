@@ -15,6 +15,7 @@ public class CommentListResponse {
     private String authorName;
     private Long authorId;
     private LocalDateTime createdAt;
+    private LocalDateTime updatedAt;
 
     private boolean canEdit;
     private boolean canDelete;

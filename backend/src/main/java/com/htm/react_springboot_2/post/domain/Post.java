@@ -26,6 +26,7 @@ public class Post {
     @Column(nullable = false)
     private String content;
     private LocalDateTime createdAt;
+    private LocalDateTime updatedAt;
 
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "user_id")
@@ -50,6 +51,7 @@ public class Post {
         this.title = title;
         this.content = content;
         this.imageKey = imageKey;
+        this.updatedAt = LocalDateTime.now();
     }
 
 }
