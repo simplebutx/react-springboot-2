@@ -54,7 +54,7 @@ USER
 
 ## ERD
 
-![ERD](./docs/erd.png)
+![ERD](./docs/erd-v2.png)
 
 
 ## ✨ Core Features
